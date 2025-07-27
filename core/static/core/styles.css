@@ -1,0 +1,308 @@
+/* ==========================
+    VARIABLES Y BASE
+========================== */
+:root {
+  --primary-color: #c9a74f;
+  --font-family-primary: 'Quicksand', sans-serif;
+}
+
+body {
+  font-family: var(--font-family-primary);
+  background-color: #fdfdfd;
+  color: #111;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ==========================
+    HERO SECTION
+========================== */
+.font-shadows {
+  font-family: 'Shadows Into Light', cursive;
+}
+
+.hero-section {
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  .hero-section {
+    background-position: center center;
+  }
+}
+
+.hero-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea el contenido al fondo */
+    min-height: 100vh;
+    width: 100%;
+    padding-bottom: 3rem; /* Espacio desde el fondo, ajusta si es necesario */
+}
+
+.hero-title {
+  font-family: 'Shadows Into Light', cursive;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.hero-title-color {
+  color: #e1e6c8;  /* Rosa intenso */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
+  font-weight: 400;
+  line-height: 1.4;
+  margin-top: 0.2rem;
+}
+
+/* ==========================
+    SCROLL DOWN ICON
+========================== */
+.scroll-down {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  color: white;
+  z-index: 10;
+  animation: bounce 2s infinite;
+}
+
+.scroll-down:hover {
+  opacity: 0.8;
+}
+
+/* ==========================
+    COUNTDOWN
+========================== */
+.countdown-section {
+  background-color: #f3f4ef;
+  padding: 3rem 1rem;
+}
+
+.countdown-message {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #222;
+  text-align: center;
+}
+
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding: 0 1rem;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+}
+
+.time-block .number {
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: #111;
+  line-height: 1.2;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.time-block .label {
+  font-size: 0.85rem;
+  text-transform: lowercase;
+  color: #555;
+  margin-top: 0.2rem;
+}
+
+.separator {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #444;
+  align-self: center;
+  line-height: 1;
+}
+
+/* ==========================
+    GALLERY
+========================== */
+.gallery-section {
+  padding: 3rem 1rem;
+  background-color: #ffffff;
+}
+
+.gallery-item {
+  margin-bottom: 1.5rem;
+}
+
+.gallery-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.gallery-image:hover {
+  transform: scale(1.02);
+}
+
+/* ==========================
+    EVENT INFO
+========================== */
+.event-title {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.event-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  margin: 0.5rem auto 0;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+.event-icon img {
+  animation: pulse 2s infinite;
+  max-width: 64px;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================
+    DRESSCODE
+========================== */
+.dresscode-section {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  background: #e6e7e1; /* O el color que prefieras */
+  padding: 2.5rem 0 2rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  z-index: 1;
+}
+
+.dresscode-section .container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ==========================
+    GIFT SECTION
+========================== */
+.gift-section {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  background: #aaaba8; /* O el color que prefieras */
+  padding: 2.5rem 0 2rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  z-index: 1;
+}
+
+.gift-section .container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .dresscode-section {
+      padding: 1.5rem 0 1rem 0;
+  }
+  .dresscode-section .container {
+      padding: 0 1rem;
+  }
+}
+
+/* ==========================
+    ANIMACIONES GLOBALES
+========================== */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.4s;
+}
+
+.social-section {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.social-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.social-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+.social-text {
+  color: white !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.social-button {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}

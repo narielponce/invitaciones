@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¡Gracias por confirmar!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+</head>
+<body>
+    <section class="section" style="min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <div class="box has-text-centered" style="max-width: 500px;">
+            <h1 class="title is-2" style="color: #9ea092;">¡Gracias por confirmar tu asistencia!</h1>
+            <p class="subtitle is-4" style="margin-top: 1.5rem;">
+                Tu respuesta ha sido registrada correctamente.<br>
+            </p>
+            <a href="{{ cliente.get_absolute_url }}" class="button is-primary mt-4">Volver a la invitación</a>
+        </div>
+    </section>
+</body>
+</html>

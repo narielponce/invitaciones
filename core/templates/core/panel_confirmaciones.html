@@ -1,0 +1,87 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Confirmaciones - {{ cliente.nombre }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="has-text-centered mb-6">
+                <h1 class="title is-3" style="color: #9ea092;">Confirmaciones de asistencia a {{ cliente.tipo_evento}} de {{ cliente.nombre }}</h1>
+                <div class="buttons is-centered mt-4">
+                    <a href="{% url 'exportar_excel' cliente.slug %}?token={{ request.GET.token }}" 
+                       class="button is-success">
+                        <span class="icon">
+                            <i class="fas fa-file-excel"></i>
+                        </span>
+                        <span>Exportar Excel</span>
+                    </a>
+                    <a href="{% url 'exportar_pdf' cliente.slug %}?token={{ request.GET.token }}" 
+                       class="button is-danger">
+                        <span class="icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Exportar PDF</span>
+                    </a>
+                </div>
+            </div>
+            <div class="box" style="overflow-x:auto;">
+                <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Asistencia</th>
+                            <th>Acompañantes</th>
+                            <th>Restricciones</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in confirmaciones %}
+                        <tr>
+                            <td>{{ c.nombre_invitado }}</td>
+                            <td>
+                                {% if c.email %}
+                                    {{ c.email }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if c.telefono %}
+                                    {{ c.telefono }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if c.asistencia %}
+                                    <span class="tag is-success">Sí</span>
+                                {% else %}
+                                    <span class="tag is-danger">No</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ c.cantidad_acompanantes }}</td>
+                            <td>{{ c.restricciones_alimentarias }}</td>
+                            <td>{{ c.fecha_confirmacion|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="has-text-centered">No hay confirmaciones aún.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
