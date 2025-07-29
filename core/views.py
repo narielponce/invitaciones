@@ -1,6 +1,6 @@
 # core/views.py
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Cliente, ConfirmacionAsistencia
+from .models import Cliente, ConfirmacionAsistencia, CancionPlaylist
 import datetime
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
@@ -30,11 +30,17 @@ def home_cliente(request, slug):
     return render(request, 'core/invitacion_base.html', context)
 
 
-def panel_confirmaciones(request, slug):
+def panel_confirmaciones(request, tipo_evento, slug):
     token = request.GET.get('token')
     cliente = get_object_or_404(Cliente, slug=slug)
+    
+    # Verificar que el tipo_evento coincida con el cliente
+    if cliente.get_url_prefix() != tipo_evento:
+        return render(request, 'core/acceso_denegado.html', status=404)
+    
     if not token or token != cliente.token_acceso:
         return render(request, 'core/acceso_denegado.html', status=403)
+    
     confirmaciones = cliente.confirmaciones.all()
     return render(request, 'core/panel_confirmaciones.html', {
         'cliente': cliente,
@@ -67,9 +73,12 @@ def rsvp(request, slug):
     return redirect("nombre_de_tu_vista_invitacion", slug=slug)
 
 
-def exportar_excel(request, slug):
+def exportar_excel(request, tipo_evento, slug):
     token = request.GET.get('token')
     cliente = get_object_or_404(Cliente, slug=slug)
+    if cliente.get_url_prefix() != tipo_evento:
+        return render(request, 'core/acceso_denegado.html', status=404)
+    
     if not token or token != cliente.token_acceso:
         return render(request, 'core/acceso_denegado.html', status=403)
     
@@ -104,7 +113,7 @@ def exportar_excel(request, slug):
     return response
 
 
-def exportar_pdf(request, slug):
+def exportar_pdf(request, tipo_evento, slug):
     from reportlab.lib.pagesizes import A4
     from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
     from reportlab.lib import colors
@@ -112,6 +121,9 @@ def exportar_pdf(request, slug):
 
     token = request.GET.get('token')
     cliente = get_object_or_404(Cliente, slug=slug)
+    if cliente.get_url_prefix() != tipo_evento:
+        return render(request, 'core/acceso_denegado.html', status=404)
+    
     if not token or token != cliente.token_acceso:
         return render(request, 'core/acceso_denegado.html', status=403)
 
@@ -161,3 +173,19 @@ def exportar_pdf(request, slug):
     buffer.close()
     response.write(pdf)
     return response
+
+
+def sugerir_cancion(request, slug):
+    cliente = get_object_or_404(Cliente, slug=slug)
+    if request.method == "POST":
+        nombre_interprete = request.POST.get("nombre_interprete")
+        nombre_tema = request.POST.get("nombre_tema")
+        
+        CancionPlaylist.objects.create(
+            cliente=cliente,
+            nombre_interprete=nombre_interprete,
+            nombre_tema=nombre_tema,
+        )
+        return render(request, "core/playlist_gracias.html", {"cliente": cliente})
+    
+    return redirect("home_cliente", slug=slug)

@@ -306,3 +306,35 @@ a {
 .social-button {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
+
+.playlist-section {
+  background: var(--secondary-color);
+  padding: 4rem 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.playlist-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 25px;
+  box-shadow: var(--shadow);
+}
+
+/* Modal con esquinas redondeadas */
+.modal-card {
+  border-radius: 15px !important;
+  overflow: hidden;
+}
+
+.modal-card-head {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.modal-card-body {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Si quieres más curvatura, cambia 8px por 12px o 16px */

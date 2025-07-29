@@ -29,6 +29,7 @@ class Cliente(models.Model):
     direccion_evento = models.TextField(blank=True)
     codigo_vestimenta = models.CharField(max_length=100, blank=True)
     instagram_url = models.URLField(max_length=300, blank=True, null=True)
+    alias_regalos = models.CharField(max_length=100, blank=True)
     token_acceso = models.CharField(max_length=40, unique=True, blank=True, null=True)
 
     imagen_fondo = models.ImageField(upload_to='fondos/', blank=True, null=True)
@@ -91,3 +92,16 @@ class ConfirmacionAsistencia(models.Model):
 
     def __str__(self):
         return f"{self.nombre_invitado} ({'Asiste' if self.asistencia else 'No asiste'})"
+
+
+class CancionPlaylist(models.Model):
+    cliente = models.ForeignKey('Cliente', on_delete=models.CASCADE, related_name='canciones')
+    nombre_interprete = models.CharField(max_length=100)
+    nombre_tema = models.CharField(max_length=200)
+    fecha_sugerencia = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.nombre_tema} - {self.nombre_interprete}"
+
+    class Meta:
+        ordering = ['-fecha_sugerencia']
