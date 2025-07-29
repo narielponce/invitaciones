@@ -15,14 +15,16 @@
             <div class="has-text-centered mb-6">
                 <h1 class="title is-3" style="color: #9ea092;">Confirmaciones de asistencia a {{ cliente.tipo_evento}} de {{ cliente.nombre }}</h1>
                 <div class="buttons is-centered mt-4">
-                    <a href="{% url 'exportar_excel' cliente.slug %}?token={{ request.GET.token }}" 
+                    <a href="{% url 'exportar_excel' cliente.get_url_prefix cliente.slug %}?token={{ request.GET.token }}" 
+   class="button is-success" 
                        class="button is-success">
                         <span class="icon">
                             <i class="fas fa-file-excel"></i>
                         </span>
                         <span>Exportar Excel</span>
                     </a>
-                    <a href="{% url 'exportar_pdf' cliente.slug %}?token={{ request.GET.token }}" 
+                    <a href="{% url 'exportar_pdf' cliente.get_url_prefix cliente.slug %}?token={{ request.GET.token }}" 
+   class="button is-danger" 
                        class="button is-danger">
                         <span class="icon">
                             <i class="fas fa-file-pdf"></i>

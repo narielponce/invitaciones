@@ -269,7 +269,7 @@
         </div>
     </section>
 
-    <!-- PLaylist Section -->
+    <!-- Playlist Section
     <section class="section links-section">
         <div class="container">
             <div class="has-text-centered mb-6">
@@ -321,6 +321,48 @@
                 </div>
             </div>
         </div>
+    </section>-->
+
+    <!-- Playlist Section -->
+    <section class="section playlist-section">
+        <div class="container">
+            <div class="has-text-centered mb-6">
+                <h1 class="title is-4 has-text-weight-semibold event-title mb-2">SUGERÍ TU CANCIÓN</h1>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    <div class="playlist-card">
+                        <form method="post" action="{% url 'sugerir_cancion' cliente.slug %}">
+                            {% csrf_token %}
+                            <div class="field">
+                                <label class="label">Intérprete</label>
+                                <div class="control">
+                                    <input class="input" type="text" name="nombre_interprete" 
+                                        placeholder="Nombre del artista o banda" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Tema</label>
+                                <div class="control">
+                                    <input class="input" type="text" name="nombre_tema" 
+                                        placeholder="Nombre de la canción" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <button class="button is-primary is-fullwidth is-large" type="submit">
+                                        <span class="icon">
+                                            <i class="fas fa-music"></i>
+                                        </span>
+                                        <span>Sugerir Canción</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Gifts Section -->
@@ -334,7 +376,7 @@
                     <p class="subtitle is-5">si deseás regalarme algo, podés colaborar con mis sueños y anhelos
                         ¡Gracias!</p>
                     <br>
-                    <a href="#" class="button is-link" target="_blank">Hacer un regalo</a>
+                    <button class="button is-link" id="gift-modal-btn">Hacer un regalo</button>
                 </div>
             </div>
         </div>
@@ -438,6 +480,41 @@
             }
         });
     </script>
+
+    <div class="modal" id="gift-modal">
+      <div class="modal-background"></div>
+      <div class="modal-card" style="width: 350px;">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Datos para regalos</p>
+          <button class="delete" aria-label="close" id="close-gift-modal"></button>
+        </header>
+        <section class="modal-card-body has-text-centered">
+          <p class="subtitle is-6 mb-2">Datos bancarios</p>
+          <p class="has-text-weight-semibold">Alias: {{ cliente.alias_regalos }}</p>
+        </section>
+      </div>
+    </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    var modal = document.getElementById('gift-modal');
+    var openBtn = document.getElementById('gift-modal-btn');
+    var closeBtn = document.getElementById('close-gift-modal');
+    var modalBg = modal.querySelector('.modal-background');
+
+    openBtn.addEventListener('click', function () {
+        modal.classList.add('is-active');
+    });
+
+    closeBtn.addEventListener('click', function () {
+        modal.classList.remove('is-active');
+    });
+
+    modalBg.addEventListener('click', function () {
+        modal.classList.remove('is-active');
+    });
+});
+</script>
 
 </body>
 

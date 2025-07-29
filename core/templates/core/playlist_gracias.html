@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¡Gracias por tu sugerencia!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+</head>
+<body>
+    <section class="section" style="min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <div class="box has-text-centered" style="max-width: 500px;">
+            <h1 class="title is-2" style="color: #9ea092;">¡Gracias por tu sugerencia musical!</h1>
+            <p class="subtitle is-4" style="margin-top: 1.5rem;">
+                Tu canción ha sido agregada a la playlist.<br>
+                ¡Gracias por ayudarnos a crear la mejor música para {{ cliente.nombre }}!
+            </p>
+            <a href="{{ cliente.get_absolute_url }}" class="button is-primary mt-4">Volver a la invitación</a>
+        </div>
+    </section>
+</body>
+</html>
