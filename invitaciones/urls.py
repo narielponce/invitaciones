@@ -4,10 +4,15 @@ from django.conf import settings
 from django.urls import path, include
 from core import views as core_views
 from django.conf.urls.static import static
+from django.shortcuts import get_object_or_404
+from core.models import Cliente
+from django.shortcuts import render
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('<slug:cliente_slug>/', core_views.home_cliente, name='home_cliente'),
+
+    path('', core_views.landing, name='landing'),
 
     # URLs específicas por tipo de evento
     path('quince/<slug:slug>/', core_views.home_cliente, name='invitacion-quince'),
@@ -25,6 +30,9 @@ urlpatterns = [
     path('<str:tipo_evento>/<slug:slug>/confirmaciones/pdf/', core_views.exportar_pdf, name='exportar_pdf'),
 
     path('playlist/<slug:slug>/', core_views.sugerir_cancion, name='sugerir_cancion'),
+    path('<str:tipo_evento>/<slug:slug>/canciones/', core_views.panel_canciones, name='panel_canciones'),
+    path('<str:tipo_evento>/<slug:slug>/canciones/excel/', core_views.exportar_excel_canciones, name='exportar_excel_canciones'),
+    path('<str:tipo_evento>/<slug:slug>/canciones/pdf/', core_views.exportar_pdf_canciones, name='exportar_pdf_canciones'),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,18 @@
+App Invitación
+
+Features faltantes:
+- Generar listado de canciones pedidas (Mismo esquema que confirmaciones)
+
+* Definir tipo de estructura para varios templates:
+- Crear 4 templates nuevos para 15 años
+- Crear 2 templates nuevos para bodas
+- Crear 2 templates nuevos para cumpleaños infantiles
+
+Pasos a seguir:
+- Definir nombre dominio .ar
+- Registrar dominio en NIC
+- Analizar opciones de hosting web + Postgre
+- Definir modo de despliegue
+- Desplegar App
+
+- Campaña de marketing

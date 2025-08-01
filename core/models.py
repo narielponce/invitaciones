@@ -18,6 +18,7 @@ class Cliente(models.Model):
     nombre = models.CharField(max_length=100)
     titulo = models.CharField(max_length=100, blank=False)
     slug = models.SlugField(unique=True, max_length=100)
+    template = models.ForeignKey('Template', on_delete=models.SET_NULL, null=True, blank=True)
     email = models.EmailField()
     telefono_envio_confirmacion = models.CharField(max_length=30, blank=True, null=True)
     tipo_evento = models.CharField(max_length=20, choices=TIPO_EVENTO_CHOICES)
@@ -105,3 +106,12 @@ class CancionPlaylist(models.Model):
 
     class Meta:
         ordering = ['-fecha_sugerencia']
+
+class Template(models.Model):
+    nombre = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True, max_length=50)
+    descripcion = models.TextField(blank=True)
+    preview = models.ImageField(upload_to='previews/', blank=True, null=True)  # Opcional
+
+    def __str__(self):
+        return self.nombre

@@ -1,0 +1,473 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ cliente.titulo }}{% endblock %}</title>
+
+    <!-- Modern CSS Framework -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'core/plantillas/moderna/styles.css' %}">
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero is-fullheight hero-section" {% if cliente.imagen_fondo %}
+        style="background-image: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('{{ cliente.imagen_fondo.url }}');" {% endif %}>
+        
+        <div class="hero-body">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span>Celebremos Juntos</span>
+                    </div>
+                    <h1 class="hero-title">
+                        {{ cliente.nombre }}
+                    </h1>
+                    <div class="hero-divider"></div>
+                    <h2 class="hero-subtitle">
+                        {{ cliente.mensaje_bienvenida }}
+                    </h2>
+                    <div class="hero-cta">
+                        <button class="btn-primary" id="scroll-down-btn">
+                            <span>Descubre más</span>
+                            <i class="fas fa-arrow-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="section countdown-section" id="cuenta-regresiva">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Cuenta Regresiva</h2>
+                <p class="section-subtitle">¡Te espero para festejar este gran momento!</p>
+            </div>
+            
+            <div class="countdown-grid" id="countdown" data-event-date="{{ event_datetime_iso_string }}">
+                <div class="countdown-card">
+                    <div class="countdown-number" id="days">--</div>
+                    <div class="countdown-label">Días</div>
+                </div>
+                <div class="countdown-card">
+                    <div class="countdown-number" id="hours">--</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-card">
+                    <div class="countdown-number" id="minutes">--</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-card">
+                    <div class="countdown-number" id="seconds">--</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Information Section -->
+    <section class="section event-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Detalles del Evento</h2>
+            </div>
+            
+            <div class="event-grid">
+                <div class="event-info-card">
+                    <div class="event-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <span class="detail-label">Fecha</span>
+                                <span class="detail-value">{{ cliente.fecha_evento }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="detail-content">
+                                <span class="detail-label">Hora</span>
+                                <span class="detail-value">{{ cliente.hora_evento|time:"H:i" }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <span class="detail-label">Lugar</span>
+                                <span class="detail-value">{{ cliente.lugar_evento }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-location-dot"></i>
+                            </div>
+                            <div class="detail-content">
+                                <span class="detail-label">Dirección</span>
+                                <span class="detail-value">{{ cliente.direccion_evento }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-action-card">
+                    <div class="action-content">
+                        <div class="action-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <h3>¿Cómo llegar?</h3>
+                        <p>Encuentra las mejores rutas y no te pierdas este momento especial</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query={{ cliente.direccion_evento|urlencode }}"
+                           target="_blank" class="btn-secondary">
+                            <i class="fas fa-directions"></i>
+                            <span>Ver en Maps</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Momentos Especiales</h2>
+            </div>
+            
+            <div class="gallery-grid">
+                {% for imagen in cliente.imagenes %}
+                {% if imagen %}
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                    <div class="gallery-card">
+                        <img src="{{ imagen.url }}" alt="Foto {{ forloop.counter }}" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section class="section rsvp-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Confirma tu Asistencia</h2>
+                <p class="section-subtitle">Tu presencia hará este día aún más especial</p>
+            </div>
+            
+            <div class="rsvp-container">
+                <div class="rsvp-card">
+                    <form method="post" action="{% url 'rsvp' cliente.slug %}" class="rsvp-form">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label class="form-label">Nombre Completo</label>
+                            <input class="form-input" type="text" name="name" placeholder="Tu nombre completo" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input class="form-input" type="email" name="email" placeholder="tu@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Teléfono</label>
+                                <input class="form-input" type="text" name="telefono" placeholder="Tu teléfono">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">¿Asistirás?</label>
+                                <select class="form-select" name="attendance" required>
+                                    <option value="">Selecciona una opción</option>
+                                    <option value="yes">Sí, asistiré</option>
+                                    <option value="no">No podré asistir</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Acompañantes</label>
+                                <select class="form-select" name="guests">
+                                    <option value="0">Solo yo</option>
+                                    <option value="1">1 acompañante</option>
+                                    <option value="2">2 acompañantes</option>
+                                    <option value="3">3 acompañantes</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Restricciones Alimentarias</label>
+                            <textarea class="form-textarea" name="dietary_restrictions"
+                                placeholder="Menciona cualquier alergia o restricción alimentaria"></textarea>
+                        </div>
+                        
+                        <button class="btn-primary btn-full" type="submit">
+                            <i class="fas fa-heart"></i>
+                            <span>Confirmar Asistencia</span>
+                        </button>
+                    </form>
+                    
+                    <div class="rsvp-alternative">
+                        <div class="divider">
+                            <span>O confirma por</span>
+                        </div>
+                        <a href="https://wa.me/{{ cliente.telefono_envio_confirmacion }}?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20al%20evento%20de%20{{cliente.nombre}}"
+                           class="btn-whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dress Code Section -->
+    <section class="section dresscode-section">
+        <div class="container">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Dress Code</h3>
+                    <p>{{ cliente.codigo_vestimenta }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Networks Section -->
+    <section class="section social-section" {% if cliente.imagen7 %}style="background-image: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('{{ cliente.imagen7.url }}');"{% endif %}>
+        <div class="container">
+            <div class="social-content">
+                <div class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <h3>Sígueme en Instagram</h3>
+                <p>Etiquétame en tus fotos y videos del evento</p>
+                <a href="{{ cliente.instagram_url }}" class="btn-social" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <span>Ver Instagram</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Playlist Section -->
+    <section class="section playlist-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Sugiere tu Canción</h2>
+                <p class="section-subtitle">Ayúdanos a crear la playlist perfecta</p>
+            </div>
+            
+            <div class="playlist-container">
+                <div class="playlist-card">
+                    <form method="post" action="{% url 'sugerir_cancion' cliente.slug %}" class="playlist-form">
+                        {% csrf_token %}
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Artista</label>
+                                <input class="form-input" type="text" name="nombre_interprete" 
+                                    placeholder="Nombre del artista o banda" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Canción</label>
+                                <input class="form-input" type="text" name="nombre_tema" 
+                                    placeholder="Nombre de la canción" required>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-primary btn-full" type="submit">
+                            <i class="fas fa-music"></i>
+                            <span>Sugerir Canción</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gifts Section -->
+    <section class="section gifts-section">
+        <div class="container">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Regalos</h3>
+                    <p>Si deseás regalarme algo, podés colaborar con mis sueños y anhelos. ¡Gracias!</p>
+                    <button class="btn-secondary" id="gift-modal-btn">
+                        <i class="fas fa-heart"></i>
+                        <span>Hacer un regalo</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Farewell Section -->
+    <section class="section farewell-section">
+        <div class="container">
+            <div class="farewell-content">
+                <h3>Gracias por acompañarme</h3>
+                <p>en este día tan especial</p>
+                <div class="signature">{{ cliente.nombre }}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2025 - Tu evento online. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Gift Modal -->
+    <div class="modal" id="gift-modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Datos para Regalos</h3>
+                <button class="modal-close" id="close-gift-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="gift-info">
+                    <div class="gift-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h4>Datos Bancarios</h4>
+                    <div class="bank-data">
+                        <span class="bank-label">Alias:</span>
+                        <span class="bank-value">{{ cliente.alias_regalos }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Countdown functionality
+            const countdownElement = document.getElementById('countdown');
+            const eventDateString = countdownElement.dataset.eventDate;
+
+            if (eventDateString) {
+                const eventDate = new Date(eventDateString);
+                const daysEl = document.getElementById('days');
+                const hoursEl = document.getElementById('hours');
+                const minutesEl = document.getElementById('minutes');
+                const secondsEl = document.getElementById('seconds');
+
+                function updateCountdown() {
+                    const now = new Date();
+                    const distance = eventDate.getTime() - now.getTime();
+
+                    if (distance < 0) {
+                        clearInterval(countdownInterval);
+                        daysEl.innerHTML = '0';
+                        hoursEl.innerHTML = '0';
+                        minutesEl.innerHTML = '0';
+                        secondsEl.innerHTML = '0';
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    daysEl.innerHTML = days;
+                    hoursEl.innerHTML = hours;
+                    minutesEl.innerHTML = minutes;
+                    secondsEl.innerHTML = seconds;
+                }
+
+                updateCountdown();
+                const countdownInterval = setInterval(updateCountdown, 1000);
+            }
+
+            // Smooth scroll functionality
+            const scrollBtn = document.getElementById("scroll-down-btn");
+            const target = document.getElementById("cuenta-regresiva");
+
+            if (scrollBtn && target) {
+                scrollBtn.addEventListener("click", function () {
+                    target.scrollIntoView({ behavior: "smooth" });
+                });
+            }
+
+            // Modal functionality
+            const modal = document.getElementById('gift-modal');
+            const openBtn = document.getElementById('gift-modal-btn');
+            const closeBtn = document.getElementById('close-gift-modal');
+            const modalOverlay = document.getElementById('modal-overlay');
+
+            if (openBtn && modal) {
+                openBtn.addEventListener('click', function () {
+                    modal.classList.add('is-active');
+                });
+            }
+
+            if (closeBtn && modal) {
+                closeBtn.addEventListener('click', function () {
+                    modal.classList.remove('is-active');
+                });
+            }
+
+            if (modalOverlay && modal) {
+                modalOverlay.addEventListener('click', function () {
+                    modal.classList.remove('is-active');
+                });
+            }
+
+            // Gallery lightbox (basic implementation)
+            const galleryImages = document.querySelectorAll('.gallery-image');
+            galleryImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    // You can implement a lightbox here
+                    console.log('Gallery image clicked');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
