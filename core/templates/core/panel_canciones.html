@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Canciones Sugeridas - {{ cliente.nombre }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="has-text-centered mb-6">
+                <h1 class="title is-3" style="color: #9ea092;">Canciones sugeridas para {{ cliente.tipo_evento }} de {{ cliente.nombre }}</h1>
+                <div class="buttons is-centered mt-4">
+                    <a href="{% url 'exportar_excel_canciones' cliente.get_url_prefix cliente.slug %}?token={{ request.GET.token }}" class="button is-success">
+                        <span class="icon">
+                            <i class="fas fa-file-excel"></i>
+                        </span>
+                        <span>Exportar Excel</span>
+                    </a>
+                    <a href="{% url 'exportar_pdf_canciones' cliente.get_url_prefix cliente.slug %}?token={{ request.GET.token }}" class="button is-danger">
+                        <span class="icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Exportar PDF</span>
+                    </a>
+                </div>
+            </div>
+            <div class="box" style="overflow-x:auto;">
+                <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+                    <thead>
+                        <tr>
+                            <th>Intérprete</th>
+                            <th>Tema</th>
+                            <th>Fecha sugerencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cancion in canciones %}
+                        <tr>
+                            <td>{{ cancion.nombre_interprete }}</td>
+                            <td>{{ cancion.nombre_tema }}</td>
+                            <td>{{ cancion.fecha_sugerencia|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" class="has-text-centered">No hay canciones sugeridas aún.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="has-text-centered mt-5">
+                <a href="{{ cliente.get_absolute_url }}" class="button is-link is-light">
+                    <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                    <span>Ir a la invitación</span>
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html> 

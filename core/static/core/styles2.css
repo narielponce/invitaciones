@@ -2,55 +2,30 @@
    VARIABLES Y BASE
 ========================== */
 :root {
-  /* Paleta de colores: Verde seco, Marrón y Tonos pastel */
-  --primary-color: #7c8471;
-  --primary-light: #8b9a7a;
-  --primary-dark: #6b7360;
-  --secondary-color: #8b6f47;
-  --secondary-light: #a0845c;
-  --secondary-dark: #7a5f3e;
-  --accent-color: #b8a082;
-  --accent-light: #c9b396;
-  --success-color: #7c8471;
-
-  /* Tonos pastel */
-  --pastel-cream: #f5f3f0;
-  --pastel-beige: #e8e4e0;
-  --pastel-sage: #e6e9e3;
-  --pastel-warm: #f0ede8;
-
-  /* Colores de texto */
-  --text-primary: #3a3a3a;
-  --text-secondary: #6b6b6b;
-  --text-light: #8a8a8a;
-  --text-muted: #a5a5a5;
-
-  /* Fondos */
+  --primary-color: #6366f1;
+  --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
+  --secondary-color: #f59e0b;
+  --accent-color: #ec4899;
+  --success-color: #10b981;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-light: #9ca3af;
   --bg-primary: #ffffff;
-  --bg-secondary: #f5f3f0;
-  --bg-accent: #e8e4e0;
-  --bg-soft: #f9f7f4;
-
-  /* Bordes y sombras */
-  --border-color: #d4cfc7;
-  --border-light: #e6e2db;
+  --bg-secondary: #f8fafc;
+  --bg-accent: #f1f5f9;
+  --border-color: #e2e8f0;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.05);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.05);
-
-  /* Radios */
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
-
-  /* Tipografía */
-  --font-primary: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: "Playfair Display", serif;
-
-  /* Transiciones */
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -67,7 +42,6 @@ body {
   color: var(--text-primary);
   background-color: var(--bg-primary);
   overflow-x: hidden;
-  font-weight: 400;
 }
 
 .container {
@@ -86,7 +60,7 @@ body {
   right: 0;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-color);
   z-index: 1000;
   transition: var(--transition);
 }
@@ -114,7 +88,6 @@ body {
 
 .logo i {
   font-size: 1.5rem;
-  color: var(--secondary-color);
 }
 
 .nav-menu {
@@ -193,7 +166,6 @@ body {
   font-size: 0.875rem;
   position: relative;
   overflow: hidden;
-  font-family: var(--font-primary);
 }
 
 .btn-primary {
@@ -205,7 +177,6 @@ body {
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
 }
 
 .btn-outline {
@@ -218,7 +189,6 @@ body {
   border-color: var(--primary-color);
   color: var(--primary-color);
   transform: translateY(-1px);
-  background: var(--pastel-sage);
 }
 
 .btn-large {
@@ -236,39 +206,9 @@ body {
 ========================== */
 .hero {
   padding: 8rem 0 4rem;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-}
-
-.hero-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("/placeholder.svg?height=1080&width=1920");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -2;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(245, 243, 240, 0.85) 0%,
-    rgba(232, 228, 224, 0.75) 50%,
-    rgba(245, 243, 240, 0.85) 100%
-  );
-  z-index: -1;
 }
 
 .hero-content {
@@ -276,23 +216,20 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
-  position: relative;
-  z-index: 1;
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(124, 132, 113, 0.1);
+  background: rgba(99, 102, 241, 0.1);
   color: var(--primary-color);
   padding: 0.5rem 1rem;
   border-radius: 50px;
   font-size: 0.875rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
-  border: 1px solid rgba(124, 132, 113, 0.2);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
 }
 
 .hero-title {
@@ -305,7 +242,7 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -316,7 +253,6 @@ body {
   color: var(--text-secondary);
   margin-bottom: 2rem;
   line-height: 1.7;
-  font-weight: 400;
 }
 
 .hero-cta {
@@ -346,7 +282,6 @@ body {
 .stat-label {
   font-size: 0.875rem;
   color: var(--text-secondary);
-  font-weight: 500;
 }
 
 .hero-visual {
@@ -362,14 +297,12 @@ body {
 
 .floating-card {
   position: absolute;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: white;
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-xl);
   padding: 1.5rem;
   width: 280px;
   animation: float 6s ease-in-out infinite;
-  border: 1px solid var(--border-light);
 }
 
 .card-1 {
@@ -405,11 +338,11 @@ body {
 }
 
 .card-avatar.birthday {
-  background: linear-gradient(135deg, var(--secondary-color), var(--secondary-light));
+  background: linear-gradient(135deg, var(--secondary-color), #fbbf24);
 }
 
 .card-avatar.quince {
-  background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+  background: linear-gradient(135deg, var(--accent-color), #f472b6);
 }
 
 .card-name {
@@ -445,13 +378,13 @@ body {
   right: 0;
   bottom: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 
 .decoration-circle {
   position: absolute;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(124, 132, 113, 0.1), rgba(139, 154, 122, 0.08));
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
 }
 
 .circle-1 {
@@ -490,14 +423,14 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(124, 132, 113, 0.1);
+  background: rgba(99, 102, 241, 0.1);
   color: var(--primary-color);
   padding: 0.5rem 1rem;
   border-radius: 50px;
   font-size: 0.875rem;
   font-weight: 500;
   margin-bottom: 1rem;
-  border: 1px solid rgba(124, 132, 113, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.2);
 }
 
 .section-title {
@@ -515,7 +448,6 @@ body {
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.7;
-  font-weight: 400;
 }
 
 /* ==========================
@@ -540,7 +472,6 @@ body {
   transition: var(--transition);
   opacity: 0;
   transform: translateY(30px);
-  border: 1px solid var(--border-light);
 }
 
 .feature-card.animate-in {
@@ -551,7 +482,6 @@ body {
 .feature-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--primary-color);
 }
 
 .feature-icon {
@@ -577,7 +507,6 @@ body {
 .feature-description {
   color: var(--text-secondary);
   line-height: 1.6;
-  font-weight: 400;
 }
 
 /* ==========================
@@ -585,7 +514,6 @@ body {
 ========================== */
 .how-it-works {
   padding: 6rem 0;
-  background: var(--bg-soft);
 }
 
 .steps-container {
@@ -629,7 +557,7 @@ body {
 .step-icon {
   width: 80px;
   height: 80px;
-  background: rgba(124, 132, 113, 0.1);
+  background: rgba(99, 102, 241, 0.1);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -649,7 +577,6 @@ body {
 .step-description {
   color: var(--text-secondary);
   line-height: 1.6;
-  font-weight: 400;
 }
 
 .step-connector {
@@ -694,7 +621,6 @@ body {
   transition: var(--transition);
   opacity: 0;
   transform: translateY(30px);
-  border: 1px solid var(--border-light);
 }
 
 .testimonial-card.animate-in {
@@ -719,7 +645,6 @@ body {
   line-height: 1.6;
   margin-bottom: 1.5rem;
   font-style: italic;
-  font-weight: 400;
 }
 
 .testimonial-author {
@@ -749,7 +674,6 @@ body {
 .author-role {
   font-size: 0.875rem;
   color: var(--text-secondary);
-  font-weight: 400;
 }
 
 /* ==========================
@@ -757,7 +681,6 @@ body {
 ========================== */
 .pricing {
   padding: 6rem 0;
-  background: var(--bg-soft);
 }
 
 .pricing-grid {
@@ -777,7 +700,7 @@ body {
   transition: var(--transition);
   opacity: 0;
   transform: translateY(30px);
-  border: 2px solid var(--border-light);
+  border: 2px solid transparent;
 }
 
 .pricing-card.animate-in {
@@ -850,7 +773,6 @@ body {
 
 .pricing-description {
   color: var(--text-secondary);
-  font-weight: 400;
 }
 
 .pricing-features {
@@ -871,7 +793,6 @@ body {
 
 .feature span {
   color: var(--text-secondary);
-  font-weight: 400;
 }
 
 /* ==========================
@@ -895,7 +816,6 @@ body {
   font-size: 1.125rem;
   margin-bottom: 2rem;
   opacity: 0.9;
-  font-weight: 400;
 }
 
 .cta-buttons {
@@ -911,7 +831,7 @@ body {
 }
 
 .cta .btn-primary:hover {
-  background: var(--pastel-cream);
+  background: var(--bg-secondary);
 }
 
 .cta .btn-outline {
@@ -945,15 +865,10 @@ body {
   margin-bottom: 1rem;
 }
 
-.footer-brand .logo i {
-  color: var(--accent-light);
-}
-
 .footer-description {
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.6;
   margin-bottom: 1.5rem;
-  font-weight: 400;
 }
 
 .social-links {
@@ -996,7 +911,6 @@ body {
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   transition: var(--transition);
-  font-weight: 400;
 }
 
 .footer-links a:hover {
@@ -1026,7 +940,6 @@ body {
   text-decoration: none;
   font-size: 0.875rem;
   transition: var(--transition);
-  font-weight: 400;
 }
 
 .footer-bottom-links a:hover {
