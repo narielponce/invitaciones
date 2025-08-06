@@ -1,20 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Llega tu Evento - Crea invitaciones digitales únicas</title>
-    <meta name="description" content="Crea invitaciones digitales personalizadas para tus eventos especiales. Fácil, rápido y elegante.">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
-</head>
-<body>
+{% extends 'core/base.html' %}
+
+{% block title %}Llega tu Evento - Crea invitaciones digitales únicas{% endblock %}
+
+{% block content %}
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -28,10 +16,10 @@
                 <div class="nav-menu" id="nav-menu">
                     <a href="#inicio" class="nav-link">Inicio</a>
                     <a href="#caracteristicas" class="nav-link">Características</a>
-                    <a href="#como-funciona" class="nav-link">Cómo funciona</a>
+                    <!--<a href="#como-funciona" class="nav-link">Cómo funciona</a>-->
                     <a href="#precios" class="nav-link">Precios</a>
                     <a href="#contacto" class="nav-link">Contacto</a>
-                    <a href="#" class="btn btn-primary">Crear Invitación</a>
+                    <!--<a href="#" class="btn btn-primary">Crear Invitación</a>-->
                 </div>
                 <div class="nav-toggle" id="nav-toggle">
                     <span></span>
@@ -531,9 +519,9 @@
     <section class="cta">
         <div class="container">
             <div class="cta-content">
-                <h2 class="cta-title">¿Listo para crear tu invitación perfecta?</h2>
+                <h2 class="cta-title">¿Listo para tener tu invitación perfecta?</h2>
                 <p class="cta-description">
-                    Únete a miles de personas que ya han creado eventos inolvidables
+                    Únete a cientos de personas que ya han creado eventos inolvidables
                 </p>
                 <div class="cta-buttons">
                     <a href="#" class="btn btn-primary btn-large">
@@ -634,6 +622,15 @@
             navToggle.classList.toggle('active');
         });
 
+        // Cerrar menu cuando se hace click en un link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -677,5 +674,10 @@
             observer.observe(el);
         });
     </script>
-</body>
-</html>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        // Scripts específicos de index
+    </script>
+{% endblock %}

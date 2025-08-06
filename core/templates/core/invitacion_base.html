@@ -1,34 +1,24 @@
-{% load static %}
+{% extends 'core/base.html' %}
 
-<!DOCTYPE html>
-<html lang="es">
+{% block title %}{{ cliente.titulo }}{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{{ cliente.titulo }}{% endblock %}</title>
-
+{% block extra_css %}
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-
-
     <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
 
-</head>
-
-<body>
+{% block content %}
     <!-- Hero Section -->
     <section class="hero is-fullheight hero-section" {% if cliente.imagen_fondo %}
         style="background-image: url('{{ cliente.imagen_fondo.url }}');" {% endif %}>
-
         <div class="hero-body">
             <div class="container has-text-centered">
                 <div class="hero-content">
@@ -41,9 +31,7 @@
                 </div>
             </div>
         </div>
-
         <!--<div class="hero-overlay"></div>-->
-
         <div class="scroll-down" id="scroll-down-btn">
             <i class="fas fa-angle-down fa-2x"></i>
         </div>
@@ -90,7 +78,7 @@
             <div class="columns is-centered">
                 <div class="column is-10">
                     <div class="columns">
-                        <div class="column is-8 is-flex"> <!-- Doble de tamaño -->
+                        <div class="column is-8 is-flex"> 
                             <div class="event-card">
                                 <div class="event-details">
                                     <p><strong>Fecha:</strong> {{ cliente.fecha_evento }}</p>
@@ -105,10 +93,9 @@
                         </div>
                         <div
                             class="column is-4 is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
-                            <!-- Derecha -->
                             <div class="event-extra-info has-text-centered">
                                 <p style="margin-bottom: 1.5rem;">Clickeá en el botón de abajo y encontrá las
-                                    indicaciones para llegar, ¡nos vemos! 😉</p>
+                                    indicaciones para llegar, ¡nos vemos! </p>
                                 <a href="https://www.google.com/maps/search/?api=1&query={{ cliente.direccion_evento|urlencode }}"
                                     target="_blank" class="button is-primary is-medium">
                                     <span class="icon">
@@ -130,7 +117,6 @@
             <!--<div class="has-text-centered mb-6">
             <h2 class="title is-2 section-title">Galería</h2>
           </div>-->
-
             <div class="columns is-multiline">
                 {% for imagen in cliente.imagenes %}
                 {% if imagen %}
@@ -269,60 +255,6 @@
         </div>
     </section>
 
-    <!-- Playlist Section
-    <section class="section links-section">
-        <div class="container">
-            <div class="has-text-centered mb-6">
-                <h2 class="title is-2 section-title">Comparte con Nosotros</h2>
-            </div>
-            <div class="columns is-centered">
-                <div class="column is-8">
-                    <div class="columns is-multiline">
-                        <div class="column is-4">
-                            <div class="link-card">
-                                <div class="link-icon">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                                <h4 class="title is-5">Instagram</h4>
-                                <p class="subtitle is-6">Comparte tus fotos con</p>
-                                <p class="hashtag">#{{ cliente.titulo}}</p>
-                                <a href="{{ cliente.instagram_url }}" class="button is-primary is-outlined"
-                                    target="_blank">
-                                    Seguir
-                                </a>
-                            </div>
-                        </div>
-                        <div class="column is-4">
-                            <div class="link-card">
-                                <div class="link-icon">
-                                    <i class="fab fa-spotify"></i>
-                                </div>
-                                <h4 class="title is-5">Playlist</h4>
-                                <p class="subtitle is-6">Añade tus canciones favoritas</p>
-                                <a href="https://open.spotify.com/playlist/example"
-                                    class="button is-success is-outlined" target="_blank">
-                                    Colaborar
-                                </a>
-                            </div>
-                        </div>
-                        <div class="column is-4">
-                            <div class="link-card">
-                                <div class="link-icon">
-                                    <i class="fas fa-gift"></i>
-                                </div>
-                                <h4 class="title is-5">Mesa de Regalos</h4>
-                                <p class="subtitle is-6">Tu presencia es nuestro regalo</p>
-                                <a href="#" class="button is-warning is-outlined" target="_blank">
-                                    Ver Lista
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
-
     <!-- Playlist Section -->
     <section class="section playlist-section">
         <div class="container">
@@ -394,27 +326,33 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="content has-text-centered">
-            <div class="footer-content">
-                <p class="subtitle is-7">Todos los derechos reservados @ 2025 - Tu evento on line </p>
-                <!--<p class="is-size-7">© 2025 - Tu evento on line</p>-->
-            </div>
-        </div>
-    </footer>
-
     <!-- Lightbox Modal (for gallery) -->
     <div class="modal" id="lightbox-modal">
         <div class="modal-background"></div>
         <div class="modal-content">
             <p class="image">
-                <img id="lightbox-image" src="/placeholder.svg" alt="">
+                <img id="lightbox-image" src="{% static 'placeholder.svg' %}" alt="">
             </p>
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
     </div>
 
+    <div class="modal" id="gift-modal">
+      <div class="modal-background"></div>
+      <div class="modal-card" style="width: 350px;">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Datos para regalos</p>
+          <button class="delete" aria-label="close" id="close-gift-modal"></button>
+        </header>
+        <section class="modal-card-body has-text-centered">
+          <p class="subtitle is-6 mb-2">Datos bancarios</p>
+          <p class="has-text-weight-semibold">Alias: {{ cliente.alias_regalos }}</p>
+        </section>
+      </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const countdownElement = document.getElementById('countdown');
@@ -481,41 +419,24 @@
         });
     </script>
 
-    <div class="modal" id="gift-modal">
-      <div class="modal-background"></div>
-      <div class="modal-card" style="width: 350px;">
-        <header class="modal-card-head">
-          <p class="modal-card-title">Datos para regalos</p>
-          <button class="delete" aria-label="close" id="close-gift-modal"></button>
-        </header>
-        <section class="modal-card-body has-text-centered">
-          <p class="subtitle is-6 mb-2">Datos bancarios</p>
-          <p class="has-text-weight-semibold">Alias: {{ cliente.alias_regalos }}</p>
-        </section>
-      </div>
-    </div>
-
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-    var modal = document.getElementById('gift-modal');
-    var openBtn = document.getElementById('gift-modal-btn');
-    var closeBtn = document.getElementById('close-gift-modal');
-    var modalBg = modal.querySelector('.modal-background');
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('gift-modal');
+            var openBtn = document.getElementById('gift-modal-btn');
+            var closeBtn = document.getElementById('close-gift-modal');
+            var modalBg = modal.querySelector('.modal-background');
 
-    openBtn.addEventListener('click', function () {
-        modal.classList.add('is-active');
-    });
+            openBtn.addEventListener('click', function () {
+                modal.classList.add('is-active');
+            });
 
-    closeBtn.addEventListener('click', function () {
-        modal.classList.remove('is-active');
-    });
+            closeBtn.addEventListener('click', function () {
+                modal.classList.remove('is-active');
+            });
 
-    modalBg.addEventListener('click', function () {
-        modal.classList.remove('is-active');
-    });
-});
-</script>
-
-</body>
-
-</html>
+            modalBg.addEventListener('click', function () {
+                modal.classList.remove('is-active');
+            });
+        });
+    </script>
+{% endblock %}
