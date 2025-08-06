@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Llega tu Evento{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Crea invitaciones digitales personalizadas para tus eventos especiales. Fácil, rápido y elegante.{% endblock %}">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <i class="fas fa-calendar-heart"></i>
+                        <span>Llega tu Evento</span>
+                    </div>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="#inicio" class="nav-link">Inicio</a>
+                    <a href="#caracteristicas" class="nav-link">Características</a>
+                    <a href="#precios" class="nav-link">Precios</a>
+                    <a href="#contacto" class="nav-link">Contacto</a>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <i class="fas fa-calendar-heart"></i>
+                        <span>Llega tu Evento</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Términos de servicio</a>
+                    <a href="#" class="footer-link">Política de privacidad</a>
+                    <a href="#" class="footer-link">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'core/js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
