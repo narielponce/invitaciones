@@ -13,9 +13,24 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {% if cliente.fuente_nombre %}
+    <link href="https://fonts.googleapis.com/css2?family={{ cliente.fuente_nombre|urlencode }}&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Ruthie&family=WindSong:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+    .hero-title {
+    font-family: '{{ cliente.fuente_nombre }}', cursive;
+    }
+    </style>
+    {% endif %}
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">-->
+
+    <link rel="icon" type="image/png" href="{% static 'core/favicon.ico' %}">
 
     <link rel="stylesheet" href="{% static 'core/plantillas/clasica/styles.css' %}">
 </head>
@@ -30,42 +45,30 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero is-fullheight hero-section" {% if cliente.imagen_fondo %}
-        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('{{ cliente.imagen_fondo.url }}');" {% endif %}>
-
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <div class="hero-content">
-                    <!-- Decorative elements -->
-                    <div class="hero-ornament hero-ornament-top"></div>
-                    
-                    <div class="hero-badge animate-fade-in">
-                        <i class="fas fa-heart"></i>
-                        <span>Celebremos Juntos</span>
-                    </div>
-                    
-                    <h1 class="hero-title font-shadows hero-title-color animate-slide-up">
-                        {{ cliente.nombre }}
-                    </h1>
-                    
-                    <div class="hero-divider animate-expand"></div>
-                    
-                    <h2 class="hero-subtitle hero-title-color animate-slide-up delay-2">
-                        {{ cliente.mensaje_bienvenida }}
-                    </h2>
-                    
-                    <div class="hero-ornament hero-ornament-bottom"></div>
-                </div>
+    <section class="hero is-fullheight hero-section" 
+        {% if cliente.imagen_fondo %}
+        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center;"
+        {% endif %}>
+        
+        <div class="hero-body hero-body-bottom">
+            <div class="hero-bottom-text">
+                <h1 class="hero-title font-shadows hero-title-color animate-slide-up">
+                    {{ cliente.nombre }}
+                </h1>
+                <h2 class="hero-subtitle hero-title-color animate-slide-up delay-2">
+                    {{ cliente.mensaje_bienvenida }}
+                </h2>
             </div>
         </div>
 
         <div class="scroll-down enhanced-scroll" id="scroll-down-btn">
-            <div class="scroll-text">Desliza para continuar</div>
+            <!-- <div class="scroll-text">Desliza para continuar</div>-->
             <div class="scroll-arrow">
                 <i class="fas fa-angle-down"></i>
             </div>
         </div>
     </section>
+
 
     <!-- Countdown Section -->
     <section class="section countdown-section" id="cuenta-regresiva">
@@ -112,7 +115,7 @@
     </section>
 
     <!-- Event Information Section -->
-    <section class="section event-info-section">
+    <!--<section class="section event-info-section">
         <div class="container">
             <div class="section-header has-text-centered">
                 <div class="section-ornament"></div>
@@ -188,7 +191,91 @@
                 </div>
             </div>
         </div>
+    </section>-->
+
+    <!-- Event Information Section -->
+    <section class="section event-info-section">
+        <div class="container">
+            <div class="section-header has-text-centered">
+                <div class="section-ornament"></div>
+                <h1 class="title is-4 has-text-weight-semibold event-title mb-5">LA FIESTA</h1>
+
+                <!-- ✅ NUEVO: Icono bajo el título -->
+                <div class="event-icon-animated mt-3">
+                    <img src="{% static 'core/plantillas/clasica/415654.png' %}" alt="Icono Fiesta">
+                </div>
+            </div>
+
+            <div class="columns is-centered">
+                <div class="column is-10">
+                    <div class="event-main-card">
+                        <div class="columns is-vcentered">
+                            <div class="column is-8">
+                                <!-- ⏩ Detalles del evento -->
+                                <div class="event-details-enhanced">
+                                    <div class="detail-row">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <span class="detail-label">Fecha</span>
+                                            <span class="detail-value">{{ cliente.fecha_evento }}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="detail-row">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <span class="detail-label">Hora</span>
+                                            <span class="detail-value">{{ cliente.hora_evento|time:"H:i" }}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="detail-row">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <span class="detail-label">Lugar</span>
+                                            <span class="detail-value">{{ cliente.lugar_evento }}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="detail-row">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-location-dot"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <span class="detail-label">Dirección</span>
+                                            <span class="detail-value">{{ cliente.direccion_evento }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-4 has-text-centered">
+                                <div class="event-cta-card">
+                                    <!-- ❌ Eliminado: <div class="event-icon-large"> ... </div> -->
+                                    <h3 class="cta-title">¿Cómo llegar?</h3>
+                                    <p class="cta-description">Encuentra las mejores rutas para no perderte este momento especial</p>
+                                    <a href="https://www.google.com/maps/search/?api=1&query={{ cliente.direccion_evento|urlencode }}"
+                                    target="_blank" class="button is-primary is-medium enhanced-button">
+                                        <span class="icon">
+                                            <i class="fas fa-route"></i>
+                                        </span>
+                                        <span>Ver en Maps</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div> <!-- columns -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+
 
     <!-- Gallery Section -->
     <section class="section gallery-section">
@@ -200,21 +287,21 @@
 
             <div class="enhanced-gallery">
                 {% for imagen in cliente.imagenes %}
-                {% if imagen %}
-                <div class="gallery-item" data-index="{{ forloop.counter0 }}">
-                    <div class="gallery-card">
-                        <figure class="image gallery-figure">
-                            <img src="{{ imagen.url }}" alt="Foto {{ forloop.counter }}" class="gallery-image">
-                        </figure>
-                        <div class="gallery-overlay">
-                            <div class="gallery-overlay-content">
-                                <i class="fas fa-search-plus"></i>
-                                <span>Ver imagen</span>
+                    {% if imagen %}
+                    <div class="gallery-item" data-index="{{ forloop.counter0 }}">
+                        <div class="gallery-card">
+                            <figure class="image gallery-figure">
+                                <img src="{{ imagen.url }}" alt="Foto {{ forloop.counter }}" class="gallery-image">
+                            </figure>
+                            <div class="gallery-overlay">
+                                <div class="gallery-overlay-content">
+                                    <i class="fas fa-search-plus"></i>
+                                    <span>Ver imagen</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {% endif %}
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
@@ -362,7 +449,7 @@
     </section>
 
     <!-- Social Networks Section -->
-    <section class="section social-section enhanced-social" {% if cliente.imagen7 %}style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('{{ cliente.imagen7.url }}');"{% endif %}>
+    <section class="section social-section enhanced-social" {% if cliente.imagen_fondo_ig %}style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('{{ cliente.imagen_fondo_ig.url }}');"{% endif %}>
         <div class="container">
             <div class="social-content-enhanced">
                 <div class="social-icon-large">
@@ -478,7 +565,7 @@
         <div class="content has-text-centered">
             <div class="footer-content">
                 <div class="footer-ornament"></div>
-                <p class="footer-text">© 2025 - Tu evento online. Todos los derechos reservados.</p>
+                <p class="footer-text"> 2025 - Tu fiesta online. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -527,7 +614,7 @@
                 <i class="fas fa-chevron-right"></i>
             </button>
             <div class="lightbox-image-container">
-                <img id="lightbox-image" src="/placeholder.svg" alt="">
+                <img id="lightbox-image" src="" alt="">
             </div>
             <div class="lightbox-counter">
                 <span id="lightbox-current">1</span> / <span id="lightbox-total">1</span>

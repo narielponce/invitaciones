@@ -1,0 +1,13 @@
+Pendientes app invitaciones
+
+Template 15 años (Clasico)
+--------------------------
+
+- En sección fiesta cambiar imagen fiesta del card "Como llegar"
+
+- Revisar alertas de seguridad
+
+DONE:
+- Modificar carga de imágenes para reducir tamaño
+- Modificar texto del footer: "2025 - Tu fiesta online. Todos los derechos reservados"
+- En sección Hero colocar cliente.nombre y cliente.mensaje_bienvenida más abajo y al centro
