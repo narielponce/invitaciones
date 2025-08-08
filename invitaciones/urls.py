@@ -19,6 +19,7 @@ urlpatterns = [
     path('boda/<slug:slug>/', core_views.home_cliente, name='invitacion-boda'),
     path('cumple/<slug:slug>/', core_views.home_cliente, name='invitacion-cumple'),
     path('varios/<slug:slug>/', core_views.home_cliente, name='invitacion-varios'),
+    path('infantil/<slug:slug>/', core_views.home_cliente, name='invitacion-infantil'),
 
     # path('confirmaciones/<slug:slug>/', core_views.panel_confirmaciones, name='panel_confirmaciones'),
     path('<str:tipo_evento>/<slug:slug>/confirmaciones/', core_views.panel_confirmaciones, name='panel_confirmaciones'),

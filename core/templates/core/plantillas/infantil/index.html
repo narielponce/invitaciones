@@ -1,0 +1,554 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ cliente.titulo }}{% endblock %}</title>
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fuentes divertidas para niños -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Fredoka+One:wght@400&family=Bubblegum+Sans:wght@400&display=swap" rel="stylesheet">
+
+    {% if cliente.fuente_nombre %}
+    <link href="https://fonts.googleapis.com/css2?family={{ cliente.fuente_nombre|urlencode }}:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+    .hero-title {
+        font-family: '{{ cliente.fuente_nombre }}', 'Fredoka One', 'Comic Sans MS', cursive;
+    }
+    </style>
+    {% endif %}
+
+    <link rel="icon" type="image/png" href="{% static 'core/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'core/plantillas/infantil/styles.css' %}">
+</head>
+
+<body>
+    <!-- Elementos flotantes animados -->
+    <div class="floating-elements">
+        <div class="floating-balloon balloon-1">🎈</div>
+        <div class="floating-balloon balloon-2">🎈</div>
+        <div class="floating-balloon balloon-3">🎈</div>
+        <div class="floating-heart heart-1">💖</div>
+        <div class="floating-heart heart-2">💝</div>
+        <div class="floating-star star-1">⭐</div>
+        <div class="floating-star star-2">🌟</div>
+        <div class="floating-star star-3">✨</div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner-kids">
+                <div class="spinner-emoji">🎪</div>
+            </div>
+            <p class="loading-text-kids">¡Preparando la fiesta más divertida! 🎉</p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero is-fullheight hero-section-kids" 
+        {% if cliente.imagen_fondo %}
+        style="background-image: linear-gradient(rgba(255, 192, 203, 0.3), rgba(138, 43, 226, 0.3)), url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center;"
+        {% endif %}>
+        
+        <div class="hero-body hero-body-kids">
+            <div class="hero-content-kids">
+                <div class="party-icon-bounce">
+                    <div class="text-8xl">🎉</div>
+                </div>
+                <h1 class="hero-title-kids animate-bounce-in">
+                    {{ cliente.nombre }}
+                </h1>
+                <h2 class="hero-subtitle-kids animate-slide-in">
+                    {{ cliente.mensaje_bienvenida }}
+                </h2>
+                <!-- <div class="hero-age-badge">
+                    <span class="age-text">¡Cumple años! 🎂</span>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="scroll-down-kids" id="scroll-down-btn">
+            <div class="scroll-text-kids">¡Desliza para la diversión!</div>
+            <div class="scroll-arrow-kids">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="section countdown-section-kids" id="cuenta-regresiva">
+        <div class="container has-text-centered">
+            <div class="section-header-kids">
+                <div class="countdown-icon">⏰</div>
+                <h2 class="section-title-kids">¡FALTAN!</h2>
+                <p class="countdown-message-kids">¡La diversión está por comenzar! 🎪</p>
+            </div>
+            
+            <div class="countdown-container-kids" id="countdown" data-event-date="{{ event_datetime_iso_string }}">
+                <div class="time-block-kids">
+                    <div class="time-card-kids time-card-red">
+                        <div class="number-kids" id="days">--</div>
+                        <div class="label-kids">Días</div>
+                        <div class="card-emoji">📅</div>
+                    </div>
+                </div>
+                <div class="separator-kids">:</div>
+
+                <div class="time-block-kids">
+                    <div class="time-card-kids time-card-blue">
+                        <div class="number-kids" id="hours">--</div>
+                        <div class="label-kids">Horas</div>
+                        <div class="card-emoji">🕐</div>
+                    </div>
+                </div>
+                <div class="separator-kids">:</div>
+
+                <div class="time-block-kids">
+                    <div class="time-card-kids time-card-green">
+                        <div class="number-kids" id="minutes">--</div>
+                        <div class="label-kids">Minutos</div>
+                        <div class="card-emoji">⏱️</div>
+                    </div>
+                </div>
+                <div class="separator-kids">:</div>
+
+                <div class="time-block-kids">
+                    <div class="time-card-kids time-card-yellow">
+                        <div class="number-kids" id="seconds">--</div>
+                        <div class="label-kids">Segundos</div>
+                        <div class="card-emoji">⚡</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Information Section -->
+    <section class="section event-info-section-kids">
+        <div class="container">
+            <div class="section-header-kids has-text-centered">
+                <div class="event-main-icon">🎪</div>
+                <h1 class="section-title-kids">¡LA FIESTA!</h1>
+                <div class="party-decorations">
+                    <span class="decoration">🎈</span>
+                    <span class="decoration">🎂</span>
+                    <span class="decoration">🎁</span>
+                </div>
+            </div>
+
+            <div class="columns is-centered">
+                <div class="column is-10">
+                    <div class="event-main-card-kids">
+                        <div class="columns is-vcentered">
+                            <div class="column is-8">
+                                <div class="event-details-kids">
+                                    <div class="detail-row-kids">
+                                        <div class="detail-icon-kids detail-icon-red">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="detail-content-kids">
+                                            <span class="detail-label-kids">📅 Fecha</span>
+                                            <span class="detail-value-kids">{{ cliente.fecha_evento }}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="detail-row-kids">
+                                        <div class="detail-icon-kids detail-icon-blue">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <div class="detail-content-kids">
+                                            <span class="detail-label-kids">🕐 Hora</span>
+                                            <span class="detail-value-kids">{{ cliente.hora_evento|time:"H:i" }}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="detail-row-kids">
+                                        <div class="detail-icon-kids detail-icon-green">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                        <div class="detail-content-kids">
+                                            <span class="detail-label-kids">🏠 Lugar</span>
+                                            <span class="detail-value-kids">{{ cliente.lugar_evento }}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="detail-row-kids">
+                                        <div class="detail-icon-kids detail-icon-purple">
+                                            <i class="fas fa-location-dot"></i>
+                                        </div>
+                                        <div class="detail-content-kids">
+                                            <span class="detail-label-kids">📍 Dirección</span>
+                                            <span class="detail-value-kids">{{ cliente.direccion_evento }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-4 has-text-centered">
+                                <div class="event-cta-card-kids">
+                                    <div class="cta-icon-kids">🗺️</div>
+                                    <h3 class="cta-title-kids">¿Cómo llegar?</h3>
+                                    <p class="cta-description-kids">¡No te pierdas la diversión!</p>
+                                    <a href="https://www.google.com/maps/search/?api=1&query={{ cliente.direccion_evento|urlencode }}"
+                                    target="_blank" class="button-kids button-maps">
+                                        <span class="button-icon">🚗</span>
+                                        <span>Ver en Maps</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery-section-kids">
+        <div class="container">
+            <div class="section-header-kids has-text-centered">
+                <div class="gallery-icon">📸</div>
+                <h2 class="section-title-kids">¡Momentos Divertidos!</h2>
+                <p class="section-subtitle-kids">¡Mira todas estas fotos geniales! 🌈</p>
+            </div>
+
+            <div class="gallery-grid-kids">
+                {% for imagen in cliente.imagenes %}
+                    {% if imagen %}
+                    <div class="gallery-item-kids" data-index="{{ forloop.counter0 }}">
+                        <div class="gallery-card-kids">
+                            <figure class="image gallery-figure-kids">
+                                <img src="{{ imagen.url }}" alt="Foto {{ forloop.counter }}" class="gallery-image-kids">
+                            </figure>
+                            <div class="gallery-overlay-kids">
+                                <div class="gallery-overlay-content-kids">
+                                    <div class="overlay-emoji">👀</div>
+                                    <span>¡Ver foto!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section class="section rsvp-section-kids">
+        <div class="container">
+            <div class="section-header-kids has-text-centered">
+                <div class="rsvp-icon">✉️</div>
+                <h1 class="section-title-kids">¡CONFIRMA TU ASISTENCIA!</h1>
+                <p class="section-subtitle-kids">¡Tu presencia hará la fiesta más divertida! 🎉</p>
+            </div>
+            
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    <div class="rsvp-card-kids">
+                        <form method="post" action="{% url 'rsvp' cliente.slug %}" class="form-kids">
+                            {% csrf_token %}
+                            
+                            <div class="form-group-kids">
+                                <label class="label-kids">
+                                    <span class="label-emoji">👤</span>
+                                    Nombre Completo
+                                </label>
+                                <div class="input-wrapper-kids">
+                                    <input class="input-kids" type="text" name="name" placeholder="Tu nombre completo" required>
+                                </div>
+                            </div>
+                            
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="form-group-kids">
+                                        <label class="label-kids">
+                                            <span class="label-emoji">📧</span>
+                                            Email
+                                        </label>
+                                        <div class="input-wrapper-kids">
+                                            <input class="input-kids" type="email" name="email" placeholder="tu@email.com">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="form-group-kids">
+                                        <label class="label-kids">
+                                            <span class="label-emoji">📱</span>
+                                            Teléfono
+                                        </label>
+                                        <div class="input-wrapper-kids">
+                                            <input class="input-kids" type="text" name="telefono" placeholder="Tu teléfono">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="form-group-kids">
+                                        <label class="label-kids">
+                                            <span class="label-emoji">✅</span>
+                                            ¿Asistirás?
+                                        </label>
+                                        <div class="select-wrapper-kids">
+                                            <select class="select-kids" name="attendance" required>
+                                                <option value="">Selecciona una opción</option>
+                                                <option value="yes">¡Sí, asistiré! 🎉</option>
+                                                <option value="no">No podré asistir 😢</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="form-group-kids">
+                                        <label class="label-kids">
+                                            <span class="label-emoji">👨‍👩‍👧‍👦</span>
+                                            Acompañantes
+                                        </label>
+                                        <div class="select-wrapper-kids">
+                                            <select class="select-kids" name="guests">
+                                                <option value="0">Solo yo</option>
+                                                <option value="1">1 acompañante</option>
+                                                <option value="2">2 acompañantes</option>
+                                                <option value="3">3 acompañantes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group-kids">
+                                <label class="label-kids">
+                                    <span class="label-emoji">🍎</span>
+                                    Alergias o Restricciones
+                                </label>
+                                <div class="textarea-wrapper-kids">
+                                    <textarea class="textarea-kids" name="dietary_restrictions"
+                                        placeholder="Menciona cualquier alergia alimentaria"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group-kids">
+                                <button class="button-kids button-submit" type="submit">
+                                    <span class="button-emoji">💖</span>
+                                    <span>¡Confirmar Asistencia!</span>
+                                    <div class="button-shine-kids"></div>
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="form-divider-kids">
+                            <span>O confirma por</span>
+                        </div>
+                        
+                        <div class="whatsapp-section-kids">
+                            <a href="https://wa.me/{{ cliente.telefono_envio_confirmacion }}?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20al%20evento%20de%20{{cliente.nombre}}"
+                               class="button-kids button-whatsapp" target="_blank">
+                                <span class="button-emoji">📱</span>
+                                <span>Confirmar por WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dress Code Section -->
+    <section class="section dresscode-section-kids">
+        <div class="container">
+            <div class="info-card-kids">
+                <div class="info-icon-wrapper-kids">
+                    <div class="info-icon-kids">👗</div>
+                </div>
+                <div class="info-content-kids">
+                    <h2 class="info-title-kids">¡CÓDIGO DE VESTIMENTA!</h2>
+                    <p class="info-description-kids">{{ cliente.codigo_vestimenta }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Networks Section -->
+    <section class="section social-section-kids" {% if cliente.imagen_fondo_ig %}style="background-image: linear-gradient(rgba(255, 105, 180, 0.8), rgba(138, 43, 226, 0.8)), url('{{ cliente.imagen_fondo_ig.url }}');"{% endif %}>
+        <div class="container">
+            <div class="social-content-kids">
+                <div class="social-icon-large-kids">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <h3 class="social-title-kids">¡Sígueme en Instagram!</h3>
+                <p class="social-description-kids">¡Etiquétame en tus fotos de la fiesta! 📸</p>
+                <a href="{{ cliente.instagram_url }}" class="button-kids button-instagram" target="_blank">
+                    <span class="button-emoji">📱</span>
+                    <span>Ver Instagram</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Playlist Section -->
+    <section class="section playlist-section-kids">
+        <div class="container">
+            <div class="section-header-kids has-text-centered">
+                <div class="playlist-icon">🎵</div>
+                <h1 class="section-title-kids">¡SUGIERE TU CANCIÓN!</h1>
+                <p class="section-subtitle-kids">¡Ayúdanos a crear la playlist perfecta! 🎶</p>
+            </div>
+            
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    <div class="playlist-card-kids">
+                        <form method="post" action="{% url 'sugerir_cancion' cliente.slug %}" class="form-kids">
+                            {% csrf_token %}
+                            
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="form-group-kids">
+                                        <label class="label-kids">
+                                            <span class="label-emoji">🎤</span>
+                                            Intérprete
+                                        </label>
+                                        <div class="input-wrapper-kids">
+                                            <input class="input-kids" type="text" name="nombre_interprete" 
+                                                placeholder="Nombre del artista o banda" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="form-group-kids">
+                                        <label class="label-kids">
+                                            <span class="label-emoji">🎶</span>
+                                            Tema
+                                        </label>
+                                        <div class="input-wrapper-kids">
+                                            <input class="input-kids" type="text" name="nombre_tema" 
+                                                placeholder="Nombre de la canción" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group-kids">
+                                <button class="button-kids button-submit" type="submit">
+                                    <span class="button-emoji">🎵</span>
+                                    <span>¡Sugerir Canción!</span>
+                                    <div class="button-shine-kids"></div>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gifts Section -->
+    <section class="section gift-section-kids">
+        <div class="container">
+            <div class="info-card-kids">
+                <div class="info-icon-wrapper-kids">
+                    <div class="info-icon-kids">🎁</div>
+                </div>
+                <div class="info-content-kids">
+                    <h2 class="info-title-kids">¡REGALOS!</h2>
+                    <p class="info-description-kids">Si querés regalarme algo, podés colaborar con mis sueños. ¡Gracias! 💖</p>
+                    <button class="button-kids button-gift" id="gift-modal-btn">
+                        <span class="button-emoji">🎁</span>
+                        <span>¡Hacer un regalo!</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Farewell Section -->
+    <section class="section farewell-section-kids">
+        <div class="container">
+            <div class="farewell-content-kids">
+                <div class="farewell-icon">💖</div>
+                <h3 class="farewell-title-kids">¡Gracias por acompañarme!</h3>
+                <p class="farewell-subtitle-kids">en este día tan especial</p>
+                <div class="farewell-signature-kids">{{ cliente.nombre }}</div>
+                <div class="farewell-decorations">
+                    <span class="decoration">🎈</span>
+                    <span class="decoration">🎂</span>
+                    <span class="decoration">🎁</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer footer-kids">
+        <div class="content has-text-centered">
+            <div class="footer-content-kids">
+                <p class="footer-text-kids">2025 - Tu fiesta online. ¡Todos los derechos reservados! 🎉</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Gift Modal -->
+    <div class="modal modal-kids" id="gift-modal">
+        <div class="modal-background"></div>
+        <div class="modal-card modal-card-kids">
+            <header class="modal-card-head modal-head-kids">
+                <div class="modal-title-wrapper-kids">
+                    <div class="modal-icon-kids">🎁</div>
+                    <p class="modal-card-title">¡Datos para Regalos!</p>
+                </div>
+                <button class="delete" aria-label="close" id="close-gift-modal"></button>
+            </header>
+            <section class="modal-card-body modal-body-kids">
+                <div class="gift-info-kids">
+                    <div class="bank-icon-kids">🏦</div>
+                    <h4 class="bank-title-kids">Datos Bancarios</h4>
+                    <div class="bank-data-card-kids">
+                        <div class="bank-field-kids">
+                            <span class="bank-label-kids">Alias:</span>
+                            <span class="bank-value-kids">{{ cliente.alias_regalos }}</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="modal modal-kids" id="lightbox-modal">
+        <div class="modal-background"></div>
+        <div class="lightbox-content-kids">
+            <button class="lightbox-close-kids" id="lightbox-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="lightbox-nav-kids lightbox-prev-kids" id="lightbox-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav-kids lightbox-next-kids" id="lightbox-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="lightbox-image-container-kids">
+                <img id="lightbox-image" src="/placeholder.svg" alt="">
+            </div>
+            <div class="lightbox-counter-kids">
+                <span id="lightbox-current">1</span> / <span id="lightbox-total">1</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{% static 'core/plantillas/infantil/script.js' %}"></script>
+</body>
+
+</html>
