@@ -12,17 +12,20 @@ class ClienteAdmin(admin.ModelAdmin):
     ordering = ("-fecha_evento",)
     fieldsets = (
         (None, {
-            'fields': ('nombre', 'titulo', 'slug', 'tipo_evento', 'template', 'fecha_evento', 'fuente_nombre')
+            'fields': ('nombre', 'titulo', 'slug', 'mensaje_bienvenida', 'template', 'fuente_nombre')
         }),
         ('Contacto', {
             'fields': ('email', 'telefono_envio_confirmacion')
         }),
-        ('Visuales', {
-            'fields': ('imagen_fondo', 'imagen_fondo_ig', 'mensaje_bienvenida', 'codigo_vestimenta', 'instagram_url')
+        ('Evento', {
+            'fields': ('tipo_evento', 'lugar_evento', 'direccion_evento', 'fecha_evento', 'hora_evento')
         }),
-        ('Galería', {
+        ('Otros', {
+            'fields': ('codigo_vestimenta', 'instagram_url', 'alias_regalos', 'token_acceso')
+        }),
+        ('Imagenes', {
             'fields': (
-                'imagen1', 'imagen2', 'imagen3', 'imagen4',
+                'imagen_fondo', 'imagen_fondo_ig', 'imagen1', 'imagen2', 'imagen3', 'imagen4',
                 'imagen5', 'imagen6', 'imagen7', 'imagen8', 'imagen9'
             )
         }),

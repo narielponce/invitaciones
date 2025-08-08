@@ -47,7 +47,7 @@
     <!-- Hero Section -->
     <section class="hero is-fullheight hero-section" 
         {% if cliente.imagen_fondo %}
-        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center;"
+        style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0,0,0,0.05)), url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center;"
         {% endif %}>
         
         <div class="hero-body hero-body-bottom">
@@ -68,7 +68,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- Countdown Section -->
     <section class="section countdown-section" id="cuenta-regresiva">
@@ -113,85 +112,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Event Information Section -->
-    <!--<section class="section event-info-section">
-        <div class="container">
-            <div class="section-header has-text-centered">
-                <div class="section-ornament"></div>
-                <h1 class="title is-4 has-text-weight-semibold event-title mb-5">LA FIESTA</h1>
-            </div>
-            
-            <div class="columns is-centered">
-                <div class="column is-10">
-                    <div class="event-main-card">
-                        <div class="columns is-vcentered">
-                            <div class="column is-8">
-                                <div class="event-details-enhanced">
-                                    <div class="detail-row">
-                                        <div class="detail-icon">
-                                            <i class="fas fa-calendar-alt"></i>
-                                        </div>
-                                        <div class="detail-content">
-                                            <span class="detail-label">Fecha</span>
-                                            <span class="detail-value">{{ cliente.fecha_evento }}</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="detail-row">
-                                        <div class="detail-icon">
-                                            <i class="fas fa-clock"></i>
-                                        </div>
-                                        <div class="detail-content">
-                                            <span class="detail-label">Hora</span>
-                                            <span class="detail-value">{{ cliente.hora_evento|time:"H:i" }}</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="detail-row">
-                                        <div class="detail-icon">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                        </div>
-                                        <div class="detail-content">
-                                            <span class="detail-label">Lugar</span>
-                                            <span class="detail-value">{{ cliente.lugar_evento }}</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="detail-row">
-                                        <div class="detail-icon">
-                                            <i class="fas fa-location-dot"></i>
-                                        </div>
-                                        <div class="detail-content">
-                                            <span class="detail-label">Dirección</span>
-                                            <span class="detail-value">{{ cliente.direccion_evento }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="column is-4 has-text-centered">
-                                <div class="event-cta-card">
-                                    <div class="event-icon-large">
-                                        <img src="{% static 'core/plantillas/clasica/415654.png' %}" alt="Icono Fiesta">
-                                    </div>
-                                    <h3 class="cta-title">¿Cómo llegar?</h3>
-                                    <p class="cta-description">Encuentra las mejores rutas para no perderte este momento especial</p>
-                                    <a href="https://www.google.com/maps/search/?api=1&query={{ cliente.direccion_evento|urlencode }}"
-                                       target="_blank" class="button is-primary is-medium enhanced-button">
-                                        <span class="icon">
-                                            <i class="fas fa-route"></i>
-                                        </span>
-                                        <span>Ver en Maps</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
 
     <!-- Event Information Section -->
     <section class="section event-info-section">
