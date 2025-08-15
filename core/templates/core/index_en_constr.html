@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tu Fiesta online{% endblock %}</title>
+    
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="{% static 'core/favicon.ico' %}">
+
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+</head>
+<body>
+    <!-- Main Construction Section -->
+    <section class="hero is-fullheight construction-hero">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-8-desktop is-10-tablet">
+                        <div class="construction-content has-text-centered">
+                            
+                            <!-- Main Title -->
+                            <h1 class="title is-1 main-title">Tu fiesta online</h1>
+                            <div class="title-divider"></div>
+                            
+                            <!-- Construction Message -->
+                            <h2 class="subtitle is-3 construction-subtitle">
+                                Estamos preparando algo especial...
+                            </h2>
+                            
+                            <p class="construction-description">
+                                Nuestra página de invitaciones está en construcción. 
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>

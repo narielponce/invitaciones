@@ -16,11 +16,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- <CHANGE> Fixed Gloria Hallelujah font implementation -->
-    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Fuentes divertidas para niños -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Fredoka+One:wght@400&family=Bubblegum+Sans:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
 
     {% if cliente.fuente_nombre %}
     <link href="https://fonts.googleapis.com/css2?family={{ cliente.fuente_nombre|urlencode }}:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+    .hero-title {
+        font-family: '{{ cliente.fuente_nombre }}', 'Fredoka One', 'Comic Sans MS', cursive;
+    }
+    </style>
     {% endif %}
 
     <link rel="icon" type="image/png" href="{% static 'core/favicon.ico' %}">
@@ -28,27 +34,48 @@
 </head>
 
 <body>
-    <!-- <CHANGE> Removed all floating animated elements -->
+    <!-- Elementos flotantes animados -->
+    <div class="floating-elements">
+        <div class="floating-balloon balloon-1">🎈</div>
+        <div class="floating-balloon balloon-2">🎈</div>
+        <div class="floating-balloon balloon-3">🎈</div>
+        <div class="floating-heart heart-1">💖</div>
+        <div class="floating-heart heart-2">💝</div>
+        <div class="floating-star star-1">⭐</div>
+        <div class="floating-star star-2">🌟</div>
+        <div class="floating-star star-3">✨</div>
+    </div>
 
-    <!-- <CHANGE> Removed loading screen animation -->
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner-kids">
+                <div class="spinner-emoji">🎪</div>
+            </div>
+            <p class="loading-text-kids">¡Preparando la fiesta más divertida! 🎉</p>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero is-fullheight hero-section-kids" 
         {% if cliente.imagen_fondo %}
-        style="background-image: linear-gradient(rgba(255, 248, 240, 0.4), rgba(230, 230, 250, 0.4)), url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center;"
+        style="background-image: linear-gradient(rgba(255, 192, 203, 0.3), rgba(138, 43, 226, 0.3)), url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center;"
         {% endif %}>
         
         <div class="hero-body hero-body-kids">
             <div class="hero-content-kids">
-                <div class="party-icon">
+                <div class="party-icon-bounce">
                     <div class="text-8xl">🎉</div>
                 </div>
-                <h1 class="hero-title-kids">
+                <h1 class="hero-title-kids animate-bounce-in">
                     {{ cliente.nombre }}
                 </h1>
-                <h2 class="hero-subtitle-kids">
+                <h2 class="hero-subtitle-kids animate-slide-in">
                     {{ cliente.mensaje_bienvenida }}
                 </h2>
+                <!-- <div class="hero-age-badge">
+                    <span class="age-text">¡Cumple años! 🎂</span>
+                </div> -->
             </div>
         </div>
 
@@ -65,7 +92,7 @@
         <div class="container has-text-centered">
             <div class="section-header-kids">
                 <div class="countdown-icon">⏰</div>
-                <!--<h2 class="section-title-kids">¡FALTAN!</h2>-->
+                <h2 class="section-title-kids">¡FALTAN!</h2>
                 <p class="countdown-message-kids">¡La diversión está por comenzar! 🎪</p>
             </div>
             
@@ -107,8 +134,6 @@
             </div>
         </div>
     </section>
-
-    <!-- ... existing code ... -->
 
     <!-- Event Information Section -->
     <section class="section event-info-section-kids">
@@ -190,8 +215,6 @@
         </div>
     </section>
 
-    <!-- ... existing code ... -->
-
     <!-- Gallery Section -->
     <section class="section gallery-section-kids">
         <div class="container">
@@ -222,8 +245,6 @@
             </div>
         </div>
     </section>
-
-    <!-- ... existing code ... -->
 
     <!-- RSVP Section -->
     <section class="section rsvp-section-kids">
@@ -324,6 +345,7 @@
                                 <button class="button-kids button-submit" type="submit">
                                     <span class="button-emoji">💖</span>
                                     <span>¡Confirmar Asistencia!</span>
+                                    <div class="button-shine-kids"></div>
                                 </button>
                             </div>
                         </form>
@@ -345,8 +367,6 @@
         </div>
     </section>
 
-    <!-- ... existing code ... -->
-
     <!-- Gifts Section -->
     <section class="section gift-section-kids">
         <div class="container">
@@ -366,8 +386,6 @@
         </div>
     </section>
 
-    <!-- ... existing code ... -->
-
     <!-- Farewell Section -->
     <section class="section farewell-section-kids">
         <div class="container">
@@ -385,8 +403,6 @@
         </div>
     </section>
 
-    <!-- ... existing code ... -->
-
     <!-- Footer -->
     <footer class="footer footer-kids">
         <div class="content has-text-centered">
@@ -395,8 +411,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- ... existing code ... -->
 
     <!-- Gift Modal -->
     <div class="modal modal-kids" id="gift-modal">
@@ -423,8 +437,6 @@
             </section>
         </div>
     </div>
-
-    <!-- ... existing code ... -->
 
     <!-- Lightbox Modal -->
     <div class="modal modal-kids" id="lightbox-modal">

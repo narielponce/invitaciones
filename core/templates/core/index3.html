@@ -12,7 +12,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'core/styles_ok.css' %}">
 </head>
 <body>
     <!-- Navigation -->
@@ -41,8 +41,6 @@
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
-        <div class="hero-background"></div>
-        <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
@@ -194,90 +192,36 @@
                     <i class="fas fa-tag"></i>
                     <span>Demos</span>
                 </div>
-                <h2 class="section-title">Explora nuestras plantillas</h2>
-                <p class="section-description">Descubre el estilo perfecto para tu evento especial</p>
             </div>
             
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <div class="pricing-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
                     <div class="pricing-header">
                         <h3 class="pricing-title">15 años</h3>
-                        <p class="pricing-description">La invitación más elegante para celebrar este momento único</p>
-                    </div>
-                    <div class="pricing-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Diseño personalizable</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Galería de fotos</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Música de fondo</span>
-                        </div>
+                        <p class="pricing-description">La invitación más practica</p>
                     </div>
                     <div class="pricing-cta">
-                        <a href="https://tufiestaonline.com.ar/quince/demoquince/" target="_blank" class="btn btn-primary">Ver demo</a>
-                    </div>
-                </div>
-
-                <div class="pricing-card featured">
-                    <div class="pricing-badge">Más popular</div>
-                    <div class="pricing-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="pricing-header">
-                        <h3 class="pricing-title">Boda</h3>
-                        <p class="pricing-description">Para tu día más especial, una invitación que refleje vuestro amor</p>
-                    </div>
-                    <div class="pricing-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Diseño romántico</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Confirmación de asistencia</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Lista de regalos</span>
-                        </div>
-                    </div>
-                    <div class="pricing-cta">
-                        <a href="https://tufiestaonline.com.ar/boda/juan-y-maria/" target="_blank" class="btn btn-primary">Ver demo</a>
+                        <a href="https://tufiestaonline.com.ar/quince/demoquince/" target="_blank" class="btn btn-outline btn-full">Ver demo</a>
                     </div>
                 </div>
 
                 <div class="pricing-card">
-                    <div class="pricing-icon">
-                        <i class="fas fa-birthday-cake"></i>
-                    </div>
                     <div class="pricing-header">
-                        <h3 class="pricing-title">Infantil</h3>
-                        <p class="pricing-description">Diversión y color para los cumpleaños más alegres</p>
-                    </div>
-                    <div class="pricing-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Diseño colorido</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Animaciones divertidas</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Juegos interactivos</span>
-                        </div>
+                        <h3 class="pricing-title">Boda</h3>
+                        <p class="pricing-description">Para tu fiesta inolvidable</p>
                     </div>
                     <div class="pricing-cta">
-                        <a href="https://tufiestaonline.com.ar/infantil/faustina/" target="_blank" class="btn btn-primary">Ver demo</a>
+                        <a href="https://tufiestaonline.com.ar/boda/juan-y-maria/" target="_blank" class="btn btn-outline btn-full">Ver demo</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Infantil</h3>
+                        <p class="pricing-description">Para los más peques</p>
+                    </div>
+                    <div class="pricing-cta">
+                        <a href="https://tufiestaonline.com.ar/boda/juan-y-maria/" target="_blank" class="btn btn-outline btn-full">Ver demo</a>
                     </div>
                 </div>
             </div>
@@ -293,8 +237,8 @@
                     Únete a cientos de personas que ya han creado eventos inolvidables
                 </p>
                 <div class="cta-buttons">
-                    <a href="https://wa.me/5493512010993" target="_blank" class="btn btn-outline btn-large">
-                        <i class="fab fa-whatsapp"></i>
+                    <a href="#" class="btn btn-outline btn-large">
+                        <i class="fas fa-phone"></i>
                         <span>Hablar con ventas</span>
                     </a>
                 </div>
@@ -306,28 +250,24 @@
     <footer class="footer" id="contacto">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <i class="fas fa-calendar-heart"></i>
-                        <span>Tu fiesta on line</span>
-                    </div>
-                    <p class="footer-description">
-                        Creamos invitaciones digitales únicas que hacen de cada evento 
-                        una experiencia inolvidable.
-                    </p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <i class="fas fa-calendar-heart"></i>
+                            <span>Tu fiesta on line</span>
+                        </div>
+                        <p class="footer-description">
+                            Creamos invitaciones digitales únicas que hacen de cada evento 
+                            una experiencia inolvidable.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
