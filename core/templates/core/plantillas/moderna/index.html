@@ -388,7 +388,7 @@
             // Countdown functionality
             const countdownElement = document.getElementById('countdown');
             const eventDateString = countdownElement.dataset.eventDate;
-
+            console.log(eventDateString)
             if (eventDateString) {
                 const eventDate = new Date(eventDateString);
                 const daysEl = document.getElementById('days');
