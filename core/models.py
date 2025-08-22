@@ -65,7 +65,7 @@ class Cliente(models.Model):
     
     fuente_nombre = models.CharField(max_length=50, choices=GOOGLE_FONTS_CHOICES, default='Great Vibes')
     mensaje_bienvenida = models.TextField(blank=True)
-    hora_evento = models.TimeField(null=True, blank=True)
+    hora_evento = models.TimeField()
     lugar_evento = models.CharField(max_length=255, blank=True)
     direccion_evento = models.TextField(blank=True)
     codigo_vestimenta = models.CharField(max_length=100, blank=True)

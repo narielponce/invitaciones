@@ -11,24 +11,6 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib import colors
 from io import BytesIO
 
-
-#def home_cliente(request, slug):
-#    cliente = get_object_or_404(Cliente, slug=slug)
-#
-#    event_datetime_iso_string = None
-#
-#    if cliente.fecha_evento and cliente.hora_evento:
-#        naive_dt = datetime.datetime.combine(cliente.fecha_evento, cliente.hora_evento)
-#        event_datetime_aware = timezone.make_aware(naive_dt, timezone.get_current_timezone())
-#        event_datetime_iso_string = event_datetime_aware.isoformat()
-#
-#    context = {
-#        'cliente': cliente,
-#        'event_datetime_iso_string': event_datetime_iso_string,
-#    }
-#
-#    return render(request, 'core/invitacion_base.html', context)
-
 def home_cliente(request, slug):
     cliente = get_object_or_404(Cliente, slug=slug)
 
@@ -38,15 +20,17 @@ def home_cliente(request, slug):
         naive_dt = datetime.datetime.combine(cliente.fecha_evento, cliente.hora_evento)
         event_datetime_aware = timezone.make_aware(naive_dt, timezone.get_current_timezone())
         event_datetime_iso_string = event_datetime_aware.isoformat()
+        print(event_datetime_iso_string)
 
     context = {
         'cliente': cliente,
         'event_datetime_iso_string': event_datetime_iso_string,
     }
-
+    print(context)
     # Selección dinámica del template
     template_slug = cliente.template.slug if getattr(cliente, "template", None) and cliente.template else 'clasica'
     template_name = f"core/plantillas/{template_slug}/index.html"
+    print (template_name)
 
     # Fallback a la plantilla clásica si no existe la seleccionada
     from django.template import TemplateDoesNotExist
