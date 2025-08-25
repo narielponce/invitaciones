@@ -72,7 +72,7 @@
                     <div class="wedding-date">
                         <p class="date-text">{{ cliente.fecha_evento|date:"j \d\e F, Y" }}</p>
                         <div class="date-separator"></div>
-                        <p class="location-text">{{ cliente.ciudad_evento|default:"Ciudad de México" }}</p>
+                        <p class="location-text">{{ cliente.ciudad_evento|default:"Ciudad de Córdoba" }}</p>
                     </div>
                     
                     <div class="hero-ornament hero-ornament-bottom"></div>
@@ -106,8 +106,9 @@
         <div class="container has-text-centered">
             <div class="section-header">
                 <div class="section-ornament"></div>
-                <h2 class="section-title">{{ cliente.titulo_countdown|default:"Faltan" }}</h2>
+                <!--<h2 class="section-title">{{ cliente.titulo_countdown|default:"Faltan" }}</h2>-->
                 <p class="countdown-message">¡Te esperamos para festejar este gran momento!</p>
+                <h2 class="section-title">{{ cliente.titulo_countdown|default:"Solo faltan" }}</h2>
             </div>
             
             <div class="countdown-container enhanced-countdown" id="countdown" data-event-date="{{ event_datetime_iso_string }}">

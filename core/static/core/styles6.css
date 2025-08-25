@@ -8,7 +8,6 @@
 /* Enhanced Color Variables */
 :root {
   /* Primary Colors */
-  --primary-grey: #BFB8B8;
   --primary-gold: #f1c40f;
   --primary-emerald: #00d084;
   --primary-coral: #ff4757;
@@ -44,7 +43,6 @@
 
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-emerald) 100%);
-  --gradient-temp: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-coral) 100%);
   --gradient-secondary: linear-gradient(135deg, var(--primary-coral) 0%, var(--primary-indigo) 100%);
   --gradient-tertiary: linear-gradient(135deg, var(--primary-indigo) 0%, var(--primary-purple) 100%);
   --gradient-hero: linear-gradient(
@@ -101,8 +99,7 @@ body {
   font-family: "Playfair Display", serif;
   font-weight: 700;
   font-size: 1.25rem;
-  color:#111827;
-  /*color: var(--primary-gold);*/
+  color: var(--primary-gold);
 }
 
 .logo i {
@@ -149,55 +146,31 @@ body {
   padding-top: 80px;
 }
 
-/* Enhanced comments for easier background image customization */
-/* ========================================
-   CAMBIAR IMAGEN DE FONDO DEL HERO
-   ========================================
-   
-   INSTRUCCIONES PASO A PASO:
-   
-   1. Sube tu imagen de fiesta a la carpeta donde tienes estos archivos
-   2. Cambia "party-background.png" por el nombre de tu imagen
-   3. Ejemplo: background-image: url("mi-imagen-fiesta.jpg");
-   
-   FORMATOS SOPORTADOS: .jpg, .jpeg, .png, .webp
-   
-   RECOMENDACIONES:
-   - Tamaño mínimo: 1920x1080 píxeles
-   - Imagen horizontal funciona mejor
-   - Colores vibrantes de fiesta (globos, confeti, decoraciones)
-   
-   ======================================== */
 .hero-background {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-
-  /* AQUÍ CAMBIAS TU IMAGEN DE FONDO: */
-  background-image: url("fondo-fiesta-2.jpeg");
-
+  background-image: url("/placeholder.svg?height=1080&width=1920");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: 1;
 }
 
-/* Enhanced overlay for better text readability over party background */
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  /*background: #9ca3af;*/
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(241, 196, 15, 0.2) 30%,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(241, 196, 15, 0.15) 30%,
     rgba(0, 208, 132, 0.15) 60%,
-    rgba(255, 71, 87, 0.15) 100%
+    rgba(255, 71, 87, 0.1) 100%
   );
   z-index: 2;
 }
@@ -215,16 +188,14 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  /*background: rgba(241, 196, 15, 0.15);*/
-  background:#353a44;
-  color:#eceef1;
-  /*color: var(--primary-gold);*/
+  background: rgba(241, 196, 15, 0.15);
+  color: var(--primary-gold);
   padding: 0.5rem 1rem;
   border-radius: 50px;
   font-size: 0.875rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  /*border: 2px solid rgba(241, 196, 15, 0.3);*/
+  border: 2px solid rgba(241, 196, 15, 0.3);
 }
 
 .hero-title {
@@ -237,7 +208,7 @@ body {
 }
 
 .gradient-text {
-  background: var(--gradient-temp);
+  background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -245,8 +216,7 @@ body {
 
 .hero-description {
   font-size: 1.25rem;
-  color: #111827;
-  /*color: var(--text-secondary);*/
+  color: var(--text-secondary);
   margin-bottom: 2rem;
   line-height: 1.6;
   font-weight: 400;
