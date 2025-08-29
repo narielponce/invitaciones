@@ -176,7 +176,7 @@ body {
   bottom: 0;
 
   /* AQUÍ CAMBIAS TU IMAGEN DE FONDO: */
-  background-image: url("boda002.jpeg");
+  background-image: url("Celebracion_informal_3.jpg");
 
   background-size: cover;
   background-position: center;
@@ -544,18 +544,6 @@ body {
   transform: translateY(30px);
 }
 
-.pricing-card img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 16px; /* opcional, para que siga la curva del card */
-  transition: transform 0.3s ease;
-}
-
-.pricing-card img:hover {
-  transform: scale(1.05);
-}
-
 .pricing-card.animate-in {
   opacity: 1;
   transform: translateY(0);
@@ -808,6 +796,113 @@ body {
 .footer-bottom p {
   color: var(--gray-400);
   font-size: 0.875rem;
+}
+
+/* Smartphone Mockup Styles */
+.smartphone-mockup {
+  position: relative;
+  width: 300px;
+  height: 600px;
+  margin: 0 auto;
+  border: 16px solid #000;
+  border-radius: 36px;
+  background: #f8f9fa;
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+}
+
+.smartphone-screen {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: white;
+  text-align: center;
+}
+
+.smartphone-content {
+  width: 100%;
+}
+
+.smartphone-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.smartphone-description {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.smartphone-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.smartphone-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.smartphone-feature i {
+  color: var(--primary-gold);
+}
+
+.smartphone-button {
+  background: var(--primary-gold);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.smartphone-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Placeholder Images */
+.placeholder-image {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(45deg, var(--primary-gold), var(--primary-emerald));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.placeholder-image.small {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+}
+
+.placeholder-image.medium {
+  height: 150px;
+  width: 150px;
+  border-radius: 10px;
+  margin: 0 auto 1rem;
 }
 
 /* Responsive Design */

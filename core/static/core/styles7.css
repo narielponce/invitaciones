@@ -8,7 +8,7 @@
 /* Enhanced Color Variables */
 :root {
   /* Primary Colors */
-  --primary-grey: #bfb8b8;
+  --primary-grey: #BFB8B8;
   --primary-gold: #f1c40f;
   --primary-emerald: #00d084;
   --primary-coral: #ff4757;
@@ -101,7 +101,7 @@ body {
   font-family: "Playfair Display", serif;
   font-weight: 700;
   font-size: 1.25rem;
-  color: #111827;
+  color:#111827;
   /*color: var(--primary-gold);*/
 }
 
@@ -176,7 +176,7 @@ body {
   bottom: 0;
 
   /* AQUÍ CAMBIAS TU IMAGEN DE FONDO: */
-  background-image: url("boda002.jpeg");
+  background-image: url("fondo-fiesta-2.jpeg");
 
   background-size: cover;
   background-position: center;
@@ -216,8 +216,8 @@ body {
   align-items: center;
   gap: 0.5rem;
   /*background: rgba(241, 196, 15, 0.15);*/
-  background: #353a44;
-  color: #eceef1;
+  background:#353a44;
+  color:#eceef1;
   /*color: var(--primary-gold);*/
   padding: 0.5rem 1rem;
   border-radius: 50px;
@@ -229,12 +229,11 @@ body {
 
 .hero-title {
   font-family: "Playfair Display", serif;
-  font-size: 3.75rem;
-  font-weight: 900;
+  font-size: 3.5rem;
+  font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
 }
 
 .gradient-text {
@@ -246,8 +245,8 @@ body {
 
 .hero-description {
   font-size: 1.25rem;
+  color: #111827;
   /*color: var(--text-secondary);*/
-  color:rgba(255, 255, 255, 0.9);
   margin-bottom: 2rem;
   line-height: 1.6;
   font-weight: 400;
@@ -325,11 +324,10 @@ body {
 
 .card-title {
   font-family: "Playfair Display", serif;
-  font-size: 1.375rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 600;
   margin-bottom: 0.5rem;
   color: var(--text-primary);
-  letter-spacing: -0.01em;
 }
 
 .card-location {
@@ -427,11 +425,10 @@ body {
 
 .section-title {
   font-family: "Playfair Display", serif;
-  font-size: 2.75rem;
-  font-weight: 800;
+  font-size: 2.5rem;
+  font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 1rem;
-  letter-spacing: -0.01em;
 }
 
 .section-description {
@@ -439,7 +436,6 @@ body {
   color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
-  font-weight: 400;
 }
 
 .features-grid {
@@ -506,17 +502,15 @@ body {
 }
 
 .feature-title {
-  font-size: 1.375rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 600;
   margin-bottom: 1rem;
   color: var(--text-primary);
-  letter-spacing: -0.01em;
 }
 
 .feature-description {
   color: var(--text-secondary);
   line-height: 1.6;
-  font-weight: 400;
 }
 
 /* Enhanced Pricing Section */
@@ -542,18 +536,6 @@ body {
   position: relative;
   opacity: 0;
   transform: translateY(30px);
-}
-
-.pricing-card img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 16px; /* opcional, para que siga la curva del card */
-  transition: transform 0.3s ease;
-}
-
-.pricing-card img:hover {
-  transform: scale(1.05);
 }
 
 .pricing-card.animate-in {
@@ -625,18 +607,16 @@ body {
 
 .pricing-title {
   font-family: "Playfair Display", serif;
-  font-size: 1.875rem;
-  font-weight: 800;
+  font-size: 1.75rem;
+  font-weight: 700;
   margin-bottom: 1rem;
   color: var(--text-primary);
-  letter-spacing: -0.01em;
 }
 
 .pricing-description {
   color: var(--text-secondary);
   line-height: 1.6;
   font-size: 1rem;
-  font-weight: 400;
 }
 
 .pricing-features {
@@ -723,11 +703,10 @@ body {
 
 .cta-title {
   font-family: "Playfair Display", serif;
-  font-size: 2.75rem;
-  font-weight: 800;
+  font-size: 2.5rem;
+  font-weight: 700;
   margin-bottom: 1rem;
   color: var(--text-primary);
-  letter-spacing: -0.01em;
 }
 
 .cta-description {
@@ -737,7 +716,6 @@ body {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  font-weight: 400;
 }
 
 /* Enhanced Footer */
