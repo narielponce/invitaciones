@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from openpyxl import Workbook
-from reportlab.lib.pagesizes import letter, A4
+from reportlab.lib.pagesizes import letter, A4, landscape
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib import colors
 from io import BytesIO
@@ -43,8 +43,6 @@ def home_cliente(request, slug):
 def panel_confirmaciones(request, tipo_evento, slug):
     token = request.GET.get('token')
     cliente = get_object_or_404(Cliente, slug=slug)
-    print(token)
-    print(cliente)
     
     # Verificar que el tipo_evento coincida con el cliente
     if cliente.get_url_prefix() != tipo_evento:
@@ -142,7 +140,7 @@ def exportar_pdf(request, tipo_evento, slug):
     confirmaciones = cliente.confirmaciones.all()
 
     buffer = BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=A4, leftMargin=20, rightMargin=20, topMargin=20, bottomMargin=20)
+    doc = SimpleDocTemplate(buffer, pagesize=landscape(A4), leftMargin=20, rightMargin=20, topMargin=20, bottomMargin=20)
     elements = []
 
     # Datos para la tabla
@@ -159,7 +157,7 @@ def exportar_pdf(request, tipo_evento, slug):
         ])
 
     # Ajusta el ancho de columnas (en puntos, suma <= 540 para A4 vertical)
-    col_widths = [70, 90, 60, 50, 50, 90, 70]
+    col_widths = [70, 180, 100, 80, 80, 120, 100]
 
     table = Table(data, colWidths=col_widths, repeatRows=1)
     table.setStyle(TableStyle([
