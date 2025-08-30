@@ -157,7 +157,7 @@ def exportar_pdf(request, tipo_evento, slug):
         ])
 
     # Ajusta el ancho de columnas (en puntos, suma <= 540 para A4 vertical)
-    col_widths = [70, 180, 100, 80, 80, 120, 100]
+    col_widths = [120, 170, 100, 80, 80, 120, 100]
 
     table = Table(data, colWidths=col_widths, repeatRows=1)
     table.setStyle(TableStyle([
