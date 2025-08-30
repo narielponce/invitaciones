@@ -52,6 +52,7 @@ class Cliente(models.Model):
         ('boda', 'Casamiento'),
         ('cumple', 'Cumpleaños'),
         ('otros', 'Otros'),
+        ('infantil', 'Infantil'),
     ]
 
     nombre = models.CharField(max_length=100)
@@ -128,6 +129,7 @@ class Cliente(models.Model):
             '15': 'quince',
             'boda': 'boda',
             'cumple': 'cumple',
+            'infantil': 'infantil',
             'otros': 'varios',
         }
         return mapping.get(str(self.tipo_evento)) or 'varios'
