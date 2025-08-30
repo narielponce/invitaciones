@@ -43,6 +43,8 @@ def home_cliente(request, slug):
 def panel_confirmaciones(request, tipo_evento, slug):
     token = request.GET.get('token')
     cliente = get_object_or_404(Cliente, slug=slug)
+    print(token)
+    print(cliente)
     
     # Verificar que el tipo_evento coincida con el cliente
     if cliente.get_url_prefix() != tipo_evento:

@@ -340,6 +340,15 @@ a {
 /* ==========================
     ENHANCED COUNTDOWN
 ========================== */
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;   /* en pantallas chicas se acomoda */
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
 .countdown-section {
   background: linear-gradient(135deg, var(--bg-accent), var(--bg-cream));
   position: relative;
@@ -368,7 +377,7 @@ a {
   z-index: 1;
 }
 
-.time-block {
+/*.time-block {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -376,6 +385,12 @@ a {
   opacity: 0;
   transform: translateY(30px);
   transition: var(--transition-smooth);
+}*/
+
+/* Cada bloque de tiempo */
+.time-block {
+  display: flex;
+  align-items: center;
 }
 
 .time-block.animate-in {
@@ -383,7 +398,7 @@ a {
   transform: translateY(0);
 }
 
-.time-card {
+/*.time-card {
   background: white;
   border-radius: var(--border-radius);
   padding: 1.5rem 1rem;
@@ -391,6 +406,36 @@ a {
   transition: var(--transition-smooth);
   position: relative;
   overflow: hidden;
+}*/
+
+/* Tarjeta de tiempo */
+.time-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.2rem 1.5rem;
+  min-width: 90px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* Número (días, horas, etc.) */
+.time-card .number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #c7a341;   /* tu dorado */
+  line-height: 1;   /* evita saltos de línea raros */
+  margin-bottom: 0.4rem;
+}
+
+/* Texto (días, horas, etc.) */
+.time-card .label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #444;
 }
 
 .time-card::before {
@@ -425,13 +470,22 @@ a {
   letter-spacing: 0.5px;
 }
 
-.separator {
+/*.separator {
   font-size: 1.8rem;
   font-weight: bold;
   color: var(--primary-color);
   align-self: center;
   line-height: 1;
   animation: pulse 2s infinite;
+}*/
+
+/* Separadores ":" */
+.separator {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #c7a341;
+  margin: 0 0.5rem;
+  line-height: 1;  /* alinea con los números */
 }
 
 /* ==========================
@@ -1400,6 +1454,30 @@ a {
 /* ==========================
     ACCESSIBILITY IMPROVEMENTS
 ========================== */
+@media (max-width: 768px) {
+  .countdown-container {
+    gap: 0.8rem;
+  }
+
+  .time-card {
+    min-width: 70px;
+    padding: 0.8rem 1rem;
+  }
+
+  .time-card .number {
+    font-size: 1.8rem;
+  }
+
+  .time-card .label {
+    font-size: 0.7rem;
+  }
+
+  .separator {
+    font-size: 1.5rem;
+    margin: 0 0.3rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
