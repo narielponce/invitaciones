@@ -29,13 +29,29 @@ body {
 }
 
 /* Hero Section */
-.hero-section-kids {
+/*.hero-section-kids {
     background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-blue) 100%);
     position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+}*/
+
+.hero-section-kids {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Fallback: si no hay imagen de fondo, usa gradiente */
+  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-blue) 100%);
+
+  /* Asegura que si hay imagen, se escale bien */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero-body-kids {
