@@ -32,17 +32,39 @@
 
     <!-- <CHANGE> Removed loading screen animation -->
 
-    <!-- Hero Section -->
+    <!-- Hero Section
     <section class="hero is-fullheight hero-section-kids" 
         {% if cliente.imagen_fondo %}
-        style="background-image: linear-gradient(rgba(255, 248, 240, 0.4), rgba(230, 230, 250, 0.4)), url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center;"
+        style="background-image: linear-gradient(rgba(255, 248, 240, 0.1), rgba(230, 230, 250, 0.1)), url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center;"
         {% endif %}>
         
         <div class="hero-body hero-body-kids">
             <div class="hero-content-kids">
-                <!--<div class="party-icon">
-                    <div class="text-8xl">🎉</div>
-                </div>-->
+                <h1 class="hero-title-kids">
+                    {{ cliente.nombre }}
+                </h1>
+                <h2 class="hero-subtitle-kids">
+                    {{ cliente.mensaje_bienvenida }}
+                </h2>
+            </div>
+        </div>
+
+        <div class="scroll-down-kids" id="scroll-down-btn">
+            <div class="scroll-text-kids">¡Desliza para la diversión!</div>
+            <div class="scroll-arrow-kids">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>-->
+
+    <!-- Hero Section -->
+    <section class="hero is-fullheight hero-section-kids"
+        {% if cliente.imagen_fondo %}
+            style="background-image: linear-gradient(rgba(255, 248, 240, 0.15), rgba(230, 230, 250, 0.15)), url('{{ cliente.imagen_fondo.url }}');"
+        {% endif %}>
+            
+        <div class="hero-body hero-body-kids">
+            <div class="hero-content-kids">
                 <h1 class="hero-title-kids">
                     {{ cliente.nombre }}
                 </h1>
@@ -59,7 +81,7 @@
             </div>
         </div>
     </section>
-
+                
     <!-- Countdown Section -->
     <section class="section countdown-section-kids" id="cuenta-regresiva">
         <div class="container has-text-centered">
