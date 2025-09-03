@@ -39,8 +39,8 @@ def procesar_imagen(imagen_campo, max_size=800):
         return None
 
 GOOGLE_FONTS_CHOICES = [
-    ('Great Vibes', 'Great Vibes'),
-    ('Dancing Script', 'Dancing Script'),
+    ('Great+Vibes', 'Great Vibes'),
+    ('Dancing+Script', 'Dancing Script'),
     ('Allura', 'Allura'),
     ('Sacramento', 'Sacramento'),
     ('Parisienne', 'Parisienne'),
