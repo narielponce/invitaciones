@@ -391,8 +391,11 @@ a {
 
 /* Cada bloque de tiempo */
 .time-block {
+  flex: 1 1 70px;
+  min-width: 70px;
   display: flex;
   align-items: center;
+  text-align: center;
 }
 
 .time-block.animate-in {
@@ -400,41 +403,40 @@ a {
   transform: translateY(0);
 }
 
-/*.time-card {
-  background: white;
-  border-radius: var(--border-radius);
-  padding: 1.5rem 1rem;
-  box-shadow: var(--shadow-medium);
-  transition: var(--transition-smooth);
-  position: relative;
-  overflow: hidden;
-}*/
-
-/* Tarjeta de tiempo */
 .time-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #fff;
-  border-radius: 16px;
-  padding: 1.2rem 1.5rem;
-  min-width: 90px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 1.5rem 1.5rem;
+  box-shadow: var(--shadow-medium);
+  transition: var(--transition-smooth);
+  position: relative;
+  height: 100%;
+  gap: 0.5rem;
 }
 
 /* Número (días, horas, etc.) */
-.time-card .number {
-  font-size: 2.5rem;
+.number {
+  width: 60px;   /* tamaño del círculo */
+  height: 60px;
+  border-radius: 80%;
+  background: #eee; /* gris */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #c7a341;   /* tu dorado */
   line-height: 1;   /* evita saltos de línea raros */
-  margin-bottom: 0.4rem;
+  margin-bottom: 5px;
 }
 
 /* Texto (días, horas, etc.) */
 .time-card .label {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #444;
@@ -460,7 +462,7 @@ a {
   font-weight: 700;
   color: var(--primary-color);
   line-height: 1;
-  margin-bottom: 0.5rem;
+  /*margin-bottom: 0.5rem;*/
   transition: var(--transition-smooth);
 }
 
@@ -1320,17 +1322,9 @@ a {
     padding: 1rem;
   }
 
-  /*.hero-title {
-    font-size: clamp(2.5rem, 8vw, 4rem);
-  }*/
-
   .hero-title {
     font-size: 2.2rem;
 }
-
-  /* .hero-subtitle {
-    font-size: clamp(1.1rem, 4vw, 1.5rem);
-  }*/
 
   .hero-subtitle {
     font-size: 1.2rem;
@@ -1414,8 +1408,13 @@ a {
 
 @media screen and (max-width: 480px) {
   .enhanced-countdown {
+    flex-direction: column;
     gap: 0.5rem;
   }
+
+  .enhanced-countdown .separator {
+      display: none;
+    }
 
   .time-card {
     padding: 0.75rem 0.5rem;
