@@ -21,8 +21,12 @@ urlpatterns = [
     path('varios/<slug:slug>/', core_views.home_cliente, name='invitacion-varios'),
     path('infantil/<slug:slug>/', core_views.home_cliente, name='invitacion-infantil'),
 
+    # --- NUEVA RUTA PARA PROBAR EL REFACTOR ---
+    path('v2/quince/<slug:slug>/', core_views.home_cliente_unificado, name='home_cliente_unificado'),
+
     # path('confirmaciones/<slug:slug>/', core_views.panel_confirmaciones, name='panel_confirmaciones'),
     path('<str:tipo_evento>/<slug:slug>/confirmaciones/', core_views.panel_confirmaciones, name='panel_confirmaciones'),
+    path('<str:tipo_evento>/<slug:slug>/', core_views.home_cliente, name='home_cliente_original'),
     path('rsvp/<slug:slug>/', core_views.rsvp, name='rsvp'),
 
     # path('confirmaciones/<slug:slug>/excel/', core_views.exportar_excel, name='exportar_excel'),

@@ -1,0 +1,746 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ cliente.titulo }}{% endblock %}</title>
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    {% if cliente.fuente_nombre %}
+        <link href="https://fonts.googleapis.com/css2?family={{ cliente.fuente_nombre|urlencode }}&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Ruthie&family=WindSong:wght@400;500&display=swap" rel="stylesheet">
+        
+        <style>
+            .hero-title {
+            font-family: '{{ cliente.fuente_nombre }}', cursive;
+            }
+        </style>
+    {% endif %}
+
+    <!-- CARGA DINÁMICA DE CSS -->
+    {% if cliente.template.slug %}
+        <link rel="stylesheet" href="{% static 'core/plantillas/'|add:cliente.template.slug|add:'/styles.css' %}">
+    {% else %}
+        <!-- Fallback a un CSS por defecto si no hay template asignado -->
+        <link rel="stylesheet" href="{% static 'core/plantillas/clasica/styles.css' %}">
+    {% endif %}
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">-->
+
+    <link rel="icon" type="image/png" href="{% static 'core/favicon.ico' %}">
+
+    <link rel="stylesheet" href="{% static 'core/plantillas/clasica/styles.css' %}">
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Preparando tu invitación...</p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero is-fullheight hero-section" 
+        {% if cliente.imagen_fondo %}
+            style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center;"
+        {% endif %}>
+        
+        <div class="hero-body hero-body-bottom">
+            <div class="hero-bottom-text">
+                <h1 class="hero-title font-shadows hero-title-color animate-slide-up">
+                    {{ cliente.nombre }}
+                </h1>
+                <h2 class="hero-subtitle hero-title-color animate-slide-up delay-2">
+                    {{ cliente.mensaje_bienvenida }}
+                </h2>
+            </div>
+        </div>
+
+        <div class="scroll-down enhanced-scroll" id="scroll-down-btn">
+            <div class="scroll-arrow">
+                <i class="fas fa-angle-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="section countdown-section" id="cuenta-regresiva">
+        <div class="container has-text-centered">
+            <div class="section-header">
+                <div class="section-ornament"></div>
+                <p class="countdown-message">¡Te espero para festejar este gran momento!</p>
+                <h2 class="section-title">Solo faltan</h2>
+            </div>
+            
+            <div class="countdown-container enhanced-countdown" id="countdown" data-event-date="{{ event_datetime_iso_string }}">
+                <div class="time-block">
+                    <div class="time-card">
+                        <div class="number" id="days">--</div>
+                        <div class="label">Días</div>
+                    </div>
+                </div>
+                <div class="separator">:</div>
+
+                <div class="time-block">
+                    <div class="time-card">
+                        <div class="number" id="hours">--</div>
+                        <div class="label">Horas</div>
+                    </div>
+                </div>
+                <div class="separator">:</div>
+
+                <div class="time-block">
+                    <div class="time-card">
+                        <div class="number" id="minutes">--</div>
+                        <div class="label">Minutos</div>
+                    </div>
+                </div>
+                <div class="separator">:</div>
+
+                <div class="time-block">
+                    <div class="time-card">
+                        <div class="number" id="seconds">--</div>
+                        <div class="label">Segundos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Information Section -->
+    <section class="section event-info-section">
+        <div class="container">
+            <div class="section-header has-text-centered">
+                <div class="section-ornament"></div>
+                <h1 class="title is-4 has-text-weight-semibold event-title mb-5">LA FIESTA</h1>
+
+                <!-- ✅ NUEVO: Icono bajo el título -->
+                <div class="event-icon-animated mt-3">
+                    <img src="{% static 'core/plantillas/clasica/415654.png' %}" alt="Icono Fiesta">
+                </div>
+            </div>
+
+            <div class="columns is-centered">
+                <div class="column is-10">
+                    <div class="event-main-card">
+                        <div class="columns is-vcentered">
+                            <div class="column is-8">
+                                <!-- ⏩ Detalles del evento -->
+                                <div class="event-details-enhanced">
+                                    <div class="detail-row">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <span class="detail-label">Fecha</span>
+                                            <span class="detail-value">{{ cliente.fecha_evento }}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="detail-row">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <span class="detail-label">Hora</span>
+                                            <span class="detail-value">{{ cliente.hora_evento|time:"H:i" }}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="detail-row">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <span class="detail-label">Lugar</span>
+                                            <span class="detail-value">{{ cliente.lugar_evento }}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="detail-row">
+                                        <div class="detail-icon">
+                                            <i class="fas fa-location-dot"></i>
+                                        </div>
+                                        <div class="detail-content">
+                                            <span class="detail-label">Dirección</span>
+                                            <span class="detail-value">{{ cliente.direccion_evento }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-4 has-text-centered">
+                                <div class="event-cta-card">
+                                    <!-- ❌ Eliminado: <div class="event-icon-large"> ... </div> -->
+                                    <h3 class="cta-title">¿Cómo llegar?</h3>
+                                    <p class="cta-description">Encuentra las mejores rutas para no perderte este momento especial</p>
+                                    <a href="https://www.google.com/maps/search/?api=1&query={{ cliente.direccion_evento|urlencode }}"
+                                    target="_blank" class="button is-primary is-medium enhanced-button">
+                                        <span class="icon">
+                                            <i class="fas fa-route"></i>
+                                        </span>
+                                        <span>Ver en Maps</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div> <!-- columns -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Gallery Section -->
+    <section class="section gallery-section">
+        <div class="container">
+            <div class="section-header has-text-centered">
+                <div class="section-ornament"></div>
+                <h2 class="section-title">Momentos Especiales</h2>
+            </div>
+
+            <div class="enhanced-gallery">
+                {% for imagen in cliente.imagenes %}
+                    {% if imagen %}
+                    <div class="gallery-item" data-index="{{ forloop.counter0 }}">
+                        <div class="gallery-card">
+                            <figure class="image gallery-figure">
+                                <img src="{{ imagen.url }}" alt="Foto {{ forloop.counter }}" class="gallery-image">
+                            </figure>
+                            <div class="gallery-overlay">
+                                <div class="gallery-overlay-content">
+                                    <i class="fas fa-search-plus"></i>
+                                    <span>Ver imagen</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section class="section rsvp-section">
+        <div class="container">
+            <div class="section-header has-text-centered">
+                <div class="section-ornament"></div>
+                <h1 class="title is-4 has-text-weight-semibold event-title mb-2">CONFIRMA TU ASISTENCIA</h1>
+                <p class="section-subtitle">Tu presencia hará este día aún más especial</p>
+            </div>
+            
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    <div class="rsvp-card enhanced-form-card">
+                        <form method="post" action="{% url 'rsvp' cliente.slug %}" class="enhanced-form">
+                            {% csrf_token %}
+                            
+                            <div class="form-group">
+                                <label class="enhanced-label">
+                                    <i class="fas fa-user"></i>
+                                    Nombre Completo
+                                </label>
+                                <div class="enhanced-input-wrapper">
+                                    <input class="input enhanced-input" type="text" name="name" placeholder="Tu nombre completo" required>
+                                </div>
+                            </div>
+                            
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="form-group">
+                                        <label class="enhanced-label">
+                                            <i class="fas fa-envelope"></i>
+                                            Email
+                                        </label>
+                                        <div class="enhanced-input-wrapper">
+                                            <input class="input enhanced-input" type="email" name="email" placeholder="tu@email.com">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="form-group">
+                                        <label class="enhanced-label">
+                                            <i class="fas fa-phone"></i>
+                                            Teléfono
+                                        </label>
+                                        <div class="enhanced-input-wrapper">
+                                            <input class="input enhanced-input" type="text" name="telefono" placeholder="Tu teléfono">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="form-group">
+                                        <label class="enhanced-label">
+                                            <i class="fas fa-check-circle"></i>
+                                            ¿Asistirás?
+                                        </label>
+                                        <div class="enhanced-select-wrapper">
+                                            <select class="select enhanced-select" name="attendance" required>
+                                                <option value="">Selecciona una opción</option>
+                                                <option value="yes">Sí, asistiré</option>
+                                                <option value="no">No podré asistir</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="form-group">
+                                        <label class="enhanced-label">
+                                            <i class="fas fa-users"></i>
+                                            Acompañantes
+                                        </label>
+                                        <div class="enhanced-select-wrapper">
+                                            <select class="select enhanced-select" name="guests">
+                                                <option value="0">Solo yo</option>
+                                                <option value="1">1 acompañante</option>
+                                                <option value="2">2 acompañantes</option>
+                                                <option value="3">3 acompañantes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="enhanced-label">
+                                    <i class="fas fa-utensils"></i>
+                                    Restricciones Alimentarias
+                                </label>
+                                <div class="enhanced-input-wrapper">
+                                    <textarea class="textarea enhanced-textarea" name="dietary_restrictions"
+                                        placeholder="Menciona cualquier alergia o restricción alimentaria"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button class="button is-primary is-fullwidth is-large enhanced-submit-btn" type="submit">
+                                    <span class="icon">
+                                        <i class="fas fa-heart"></i>
+                                    </span>
+                                    <span>Confirmar Asistencia</span>
+                                    <div class="button-shine"></div>
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="form-divider">
+                            <span>O confirma por</span>
+                        </div>
+                        
+                        <div class="whatsapp-section">
+                            <a href="https://wa.me/{{ cliente.telefono_envio_confirmacion }}?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20al%20evento%20de%20{{cliente.nombre}}"
+                               class="button is-success is-fullwidth enhanced-whatsapp-btn" target="_blank">
+                                <span class="icon">
+                                    <i class="fab fa-whatsapp"></i>
+                                </span>
+                                <span>Confirmar por WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dress Code Section -->
+    <section class="section dresscode-section">
+        <div class="container">
+            <div class="info-card-enhanced">
+                <div class="info-icon-wrapper">
+                    <div class="info-icon-bg"></div>
+                    <img src="{% static 'core/plantillas/clasica/dress_code.png' %}" alt="Dress Code" class="info-icon">
+                </div>
+                <div class="info-content">
+                    <h2 class="info-title">DRESS CODE</h2>
+                    <p class="info-description">{{ cliente.codigo_vestimenta }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Networks Section -->
+    <section class="section social-section enhanced-social" {% if cliente.imagen_fondo_ig %}style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('{{ cliente.imagen_fondo_ig.url }}');"{% endif %}>
+        <div class="container">
+            <div class="social-content-enhanced">
+                <div class="social-icon-large">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <h3 class="social-title">Sígueme en Instagram</h3>
+                <p class="social-description">Etiquétame en tus fotos y videos del evento</p>
+                <a href="{{ cliente.instagram_url }}" class="button is-link enhanced-social-btn" target="_blank">
+                    <span class="icon">
+                        <i class="fab fa-instagram"></i>
+                    </span>
+                    <span>Ver Instagram</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Playlist Section -->
+    <section class="section playlist-section">
+        <div class="container">
+            <div class="section-header has-text-centered">
+                <div class="section-ornament"></div>
+                <h1 class="title is-4 has-text-weight-semibold event-title mb-2">SUGERÍ TU CANCIÓN</h1>
+                <p class="section-subtitle">Ayúdanos a crear la playlist perfecta</p>
+            </div>
+            
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    <div class="playlist-card enhanced-form-card">
+                        <form method="post" action="{% url 'sugerir_cancion' cliente.slug %}" class="enhanced-form">
+                            {% csrf_token %}
+                            
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="form-group">
+                                        <label class="enhanced-label">
+                                            <i class="fas fa-microphone"></i>
+                                            Intérprete
+                                        </label>
+                                        <div class="enhanced-input-wrapper">
+                                            <input class="input enhanced-input" type="text" name="nombre_interprete" 
+                                                placeholder="Nombre del artista o banda" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="form-group">
+                                        <label class="enhanced-label">
+                                            <i class="fas fa-music"></i>
+                                            Tema
+                                        </label>
+                                        <div class="enhanced-input-wrapper">
+                                            <input class="input enhanced-input" type="text" name="nombre_tema" 
+                                                placeholder="Nombre de la canción" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button class="button is-primary is-fullwidth is-large enhanced-submit-btn" type="submit">
+                                    <span class="icon">
+                                        <i class="fas fa-plus"></i>
+                                    </span>
+                                    <span>Sugerir Canción</span>
+                                    <div class="button-shine"></div>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gifts Section -->
+    <section class="section gift-section">
+        <div class="container">
+            <div class="info-card-enhanced">
+                <div class="info-icon-wrapper">
+                    <div class="info-icon-bg"></div>
+                    <img src="{% static 'core/plantillas/clasica/gift.png' %}" alt="Regalos" class="info-icon">
+                </div>
+                <div class="info-content">
+                    <h2 class="info-title">REGALOS</h2>
+                    <p class="info-description">Si deseás regalarme algo, podés colaborar con mis sueños y anhelos. ¡Gracias!</p>
+                    <button class="button is-link enhanced-gift-btn" id="gift-modal-btn">
+                        <span class="icon">
+                            <i class="fas fa-gift"></i>
+                        </span>
+                        <span>Hacer un regalo</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bye Section-->
+    <section class="section farewell-section">
+        <div class="container">
+            <div class="farewell-content">
+                <div class="farewell-ornament"></div>
+                <h3 class="farewell-title">Gracias por acompañarme</h3>
+                <p class="farewell-subtitle">en este día tan especial</p>
+                <div class="farewell-signature">{{ cliente.nombre }}</div>
+                <div class="farewell-ornament"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer enhanced-footer">
+        <div class="content has-text-centered">
+            <div class="footer-content">
+                <div class="footer-ornament"></div>
+                <p class="footer-text"> 2025 - Tu fiesta online. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enhanced Gift Modal -->
+    <div class="modal enhanced-modal" id="gift-modal">
+        <div class="modal-background"></div>
+        <div class="modal-card enhanced-modal-card">
+            <header class="modal-card-head">
+                <div class="modal-title-wrapper">
+                    <div class="modal-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <p class="modal-card-title">Datos para Regalos</p>
+                </div>
+                <button class="delete enhanced-delete" aria-label="close" id="close-gift-modal"></button>
+            </header>
+            <section class="modal-card-body enhanced-modal-body">
+                <div class="gift-info-enhanced">
+                    <div class="bank-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h4 class="bank-title">Datos Bancarios</h4>
+                    <div class="bank-data-card">
+                        <div class="bank-field">
+                            <span class="bank-label">Alias:</span>
+                            <span class="bank-value">{{ cliente.alias_regalos }}</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Enhanced Lightbox Modal -->
+    <div class="modal enhanced-lightbox" id="lightbox-modal">
+        <div class="modal-background"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightbox-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="lightbox-nav lightbox-prev" id="lightbox-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav lightbox-next" id="lightbox-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="lightbox-image-container">
+                <img id="lightbox-image" src="" alt="">
+            </div>
+            <div class="lightbox-counter">
+                <span id="lightbox-current">1</span> / <span id="lightbox-total">1</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Loading screen
+            const loadingScreen = document.getElementById('loading-screen');
+            setTimeout(() => {
+                loadingScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 1500);
+
+            // Enhanced countdown functionality
+            const countdownElement = document.getElementById('countdown');
+            const eventDateString = countdownElement.dataset.eventDate;
+
+            if (eventDateString) {
+                const eventDate = new Date(eventDateString);
+                const daysEl = document.getElementById('days');
+                const hoursEl = document.getElementById('hours');
+                const minutesEl = document.getElementById('minutes');
+                const secondsEl = document.getElementById('seconds');
+
+                function updateCountdown() {
+                    const now = new Date();
+                    const distance = eventDate.getTime() - now.getTime();
+
+                    if (distance < 0) {
+                        clearInterval(countdownInterval);
+                        daysEl.innerHTML = '0';
+                        hoursEl.innerHTML = '0';
+                        minutesEl.innerHTML = '0';
+                        secondsEl.innerHTML = '0';
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // Animate number changes
+                    animateNumber(daysEl, days);
+                    animateNumber(hoursEl, hours);
+                    animateNumber(minutesEl, minutes);
+                    animateNumber(secondsEl, seconds);
+                }
+
+                function animateNumber(element, newValue) {
+                    if (element.innerHTML !== newValue.toString()) {
+                        element.style.transform = 'scale(1.1)';
+                        setTimeout(() => {
+                            element.innerHTML = newValue;
+                            element.style.transform = 'scale(1)';
+                        }, 150);
+                    }
+                }
+
+                updateCountdown();
+                const countdownInterval = setInterval(updateCountdown, 1000);
+            }
+
+            // Enhanced smooth scroll
+            const scrollBtn = document.getElementById("scroll-down-btn");
+            const target = document.getElementById("cuenta-regresiva");
+
+            if (scrollBtn && target) {
+                scrollBtn.addEventListener("click", function () {
+                    target.scrollIntoView({ behavior: "smooth" });
+                });
+            }
+
+            // Enhanced modal functionality
+            const modal = document.getElementById('gift-modal');
+            const openBtn = document.getElementById('gift-modal-btn');
+            const closeBtn = document.getElementById('close-gift-modal');
+            const modalBg = modal.querySelector('.modal-background');
+
+            if (openBtn && modal) {
+                openBtn.addEventListener('click', function () {
+                    modal.classList.add('is-active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            function closeModal() {
+                modal.classList.remove('is-active');
+                document.body.style.overflow = 'auto';
+            }
+
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+            if (modalBg) modalBg.addEventListener('click', closeModal);
+
+            // Enhanced gallery lightbox
+            const galleryImages = document.querySelectorAll('.gallery-item');
+            const lightboxModal = document.getElementById('lightbox-modal');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+            const lightboxCurrent = document.getElementById('lightbox-current');
+            const lightboxTotal = document.getElementById('lightbox-total');
+            
+            let currentImageIndex = 0;
+            const imageUrls = Array.from(galleryImages).map(item => 
+                item.querySelector('.gallery-image').src
+            );
+
+            lightboxTotal.textContent = imageUrls.length;
+
+            galleryImages.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    currentImageIndex = index;
+                    showLightbox();
+                });
+            });
+
+            function showLightbox() {
+                lightboxImage.src = imageUrls[currentImageIndex];
+                lightboxCurrent.textContent = currentImageIndex + 1;
+                lightboxModal.classList.add('is-active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightboxModal.classList.remove('is-active');
+                document.body.style.overflow = 'auto';
+            }
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxModal.querySelector('.modal-background').addEventListener('click', closeLightbox);
+
+            lightboxPrev.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex - 1 + imageUrls.length) % imageUrls.length;
+                showLightbox();
+            });
+
+            lightboxNext.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex + 1) % imageUrls.length;
+                showLightbox();
+            });
+
+            // Keyboard navigation for lightbox
+            document.addEventListener('keydown', (e) => {
+                if (lightboxModal.classList.contains('is-active')) {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowLeft') lightboxPrev.click();
+                    if (e.key === 'ArrowRight') lightboxNext.click();
+                }
+            });
+
+            // Form enhancements
+            const inputs = document.querySelectorAll('.enhanced-input, .enhanced-textarea');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('focused');
+                    if (this.value) {
+                        this.parentElement.classList.add('has-value');
+                    } else {
+                        this.parentElement.classList.remove('has-value');
+                    }
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('.gallery-item, .time-block, .detail-row, .info-card-enhanced').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>
