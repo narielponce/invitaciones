@@ -10,8 +10,9 @@ from reportlab.lib.pagesizes import letter, A4, landscape
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib import colors
 from io import BytesIO
+from django.contrib import messages
 
-def home_cliente(request, slug):
+def home_cliente(request, slug, tipo_evento=None):
     cliente = get_object_or_404(Cliente, slug=slug)
 
     event_datetime_iso_string = None
@@ -39,7 +40,7 @@ def home_cliente(request, slug):
     except TemplateDoesNotExist:
         return render(request, "core/plantillas/clasica/index.html", context)
 
-def home_cliente_unificado(request, slug):
+def home_cliente_unificado(request, slug, tipo_evento=None):
     cliente = get_object_or_404(Cliente, slug=slug)
 
     event_datetime_iso_string = None
@@ -89,7 +90,7 @@ def panel_confirmaciones(request, tipo_evento, slug):
     })
 
 
-def rsvp(request, slug):
+def rsvp(request, slug, tipo_evento=None):
     cliente = get_object_or_404(Cliente, slug=slug)
     if request.method == "POST":
         nombre = request.POST.get("name")
@@ -109,9 +110,16 @@ def rsvp(request, slug):
             cantidad_acompanantes=cantidad,
             restricciones_alimentarias=restricciones,
         )
+
+        # messages.success(request, '¡Gracias! Tu asistencia ha sido confirmada con éxito.')
+
         return render(request, "core/rsvp_gracias.html", {"cliente": cliente})
+        # ✅ REDIRECCIONA a la URL principal de la invitación
+        # Usa el nombre real de tu URL principal para la vista home_cliente
+        # return redirect(cliente.get_absolute_url())
     # Si GET, solo renderiza la invitación normalmente (o redirige)
-    return redirect("nombre_de_tu_vista_invitacion", slug=slug)
+    # return redirect("nombre_de_tu_vista_invitacion", slug=slug)
+    return redirect(cliente.get_absolute_url())
 
 
 def exportar_excel(request, tipo_evento, slug):
@@ -216,7 +224,7 @@ def exportar_pdf(request, tipo_evento, slug):
     return response
 
 
-def sugerir_cancion(request, slug):
+def sugerir_cancion(request, slug, tipo_evento=None):
     cliente = get_object_or_404(Cliente, slug=slug)
     if request.method == "POST":
         nombre_interprete = request.POST.get("nombre_interprete")
@@ -227,9 +235,12 @@ def sugerir_cancion(request, slug):
             nombre_interprete=nombre_interprete,
             nombre_tema=nombre_tema,
         )
+        # messages.success(request, '¡Gracias! Tu sugerencia de canción ha sido guardada.')
         return render(request, "core/playlist_gracias.html", {"cliente": cliente})
+        # return render(request, "core/playlist_gracias.html", {"cliente": cliente})
+        return redirect(cliente.get_absolute_url())
     
-    return redirect("home_cliente", slug=slug)
+    return redirect(cliente.get_absolute_url())
 
 
 def panel_canciones(request, tipo_evento, slug):

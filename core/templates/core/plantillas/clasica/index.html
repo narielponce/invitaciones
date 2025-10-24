@@ -36,6 +36,13 @@
 </head>
 
 <body>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="message is-success">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <div class="loading-content">
@@ -47,7 +54,7 @@
     <!-- Hero Section -->
     <section class="hero is-fullheight hero-section"
         {% if cliente.imagen_fondo %}
-            style="background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1)), url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center;"
+            style="background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1)), url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center 25%;"
         {% endif %}>
         
         <div class="hero-body hero-body-bottom">
@@ -195,7 +202,6 @@
         </div>
     </section>
 
-
     <!-- Gallery Section -->
     <section class="section gallery-section">
         <div class="container">
@@ -238,7 +244,7 @@
             <div class="columns is-centered">
                 <div class="column is-6">
                     <div class="rsvp-card enhanced-form-card">
-                        <form method="post" action="{% url 'rsvp' cliente.slug %}" class="enhanced-form">
+                        <form method="post" action="{% url 'rsvp' cliente.get_url_prefix cliente.slug %}" class="enhanced-form">
                             {% csrf_token %}
                             
                             <div class="form-group">
@@ -284,8 +290,8 @@
                                             ¿Asistirás?
                                         </label>
                                         <div class="enhanced-select-wrapper">
-                                            <select class="select enhanced-select" name="attendance" required>
-                                                <option value="">Selecciona una opción</option>
+                                            <select class="select" name="attendance" required>
+                                                <option value="" disabled selected>Selecciona una opción</option>
                                                 <option value="yes">Sí, asistiré</option>
                                                 <option value="no">No podré asistir</option>
                                             </select>
@@ -299,7 +305,7 @@
                                             Acompañantes
                                         </label>
                                         <div class="enhanced-select-wrapper">
-                                            <select class="select enhanced-select" name="guests">
+                                            <select class="select" name="guests">
                                                 <option value="0">Solo yo</option>
                                                 <option value="1">1 acompañante</option>
                                                 <option value="2">2 acompañantes</option>
@@ -368,7 +374,10 @@
     </section>
 
     <!-- Social Networks Section -->
-    <section class="section social-section enhanced-social" {% if cliente.imagen_fondo_ig %}style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('{{ cliente.imagen_fondo_ig.url }}');"{% endif %}>
+    <section class="section social-section enhanced-social"
+        {% if cliente.imagen_fondo_ig %}
+            style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('{{ cliente.imagen_fondo_ig.url }}'); background-size: cover; background-position: center 20%;"
+        {% endif %}>
         <div class="container">
             <div class="social-content-enhanced">
                 <div class="social-icon-large">
@@ -398,7 +407,7 @@
             <div class="columns is-centered">
                 <div class="column is-6">
                     <div class="playlist-card enhanced-form-card">
-                        <form method="post" action="{% url 'sugerir_cancion' cliente.slug %}" class="enhanced-form">
+                        <form method="post" action="{% url 'sugerir_cancion' cliente.get_url_prefix cliente.slug %}" class="enhanced-form">
                             {% csrf_token %}
                             
                             <div class="columns">

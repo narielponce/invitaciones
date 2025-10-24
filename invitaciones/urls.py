@@ -27,14 +27,16 @@ urlpatterns = [
     # path('confirmaciones/<slug:slug>/', core_views.panel_confirmaciones, name='panel_confirmaciones'),
     path('<str:tipo_evento>/<slug:slug>/confirmaciones/', core_views.panel_confirmaciones, name='panel_confirmaciones'),
     path('<str:tipo_evento>/<slug:slug>/', core_views.home_cliente, name='home_cliente_original'),
-    path('rsvp/<slug:slug>/', core_views.rsvp, name='rsvp'),
+    # path('rsvp/<slug:slug>/', core_views.rsvp, name='rsvp'),
+    path('<str:tipo_evento>/<slug:slug>/rsvp/', core_views.rsvp, name='rsvp'),
 
     # path('confirmaciones/<slug:slug>/excel/', core_views.exportar_excel, name='exportar_excel'),
     # path('confirmaciones/<slug:slug>/pdf/', core_views.exportar_pdf, name='exportar_pdf'),
     path('<str:tipo_evento>/<slug:slug>/confirmaciones/excel/', core_views.exportar_excel, name='exportar_excel'),
     path('<str:tipo_evento>/<slug:slug>/confirmaciones/pdf/', core_views.exportar_pdf, name='exportar_pdf'),
 
-    path('playlist/<slug:slug>/', core_views.sugerir_cancion, name='sugerir_cancion'),
+    path('<str:tipo_evento>/<slug:slug>/playlist/', core_views.sugerir_cancion, name='sugerir_cancion'),
+    # path('playlist/<slug:slug>/', core_views.sugerir_cancion, name='sugerir_cancion'),
     path('<str:tipo_evento>/<slug:slug>/canciones/', core_views.panel_canciones, name='panel_canciones'),
     path('<str:tipo_evento>/<slug:slug>/canciones/excel/', core_views.exportar_excel_canciones, name='exportar_excel_canciones'),
     path('<str:tipo_evento>/<slug:slug>/canciones/pdf/', core_views.exportar_pdf_canciones, name='exportar_pdf_canciones'),
