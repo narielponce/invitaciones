@@ -1461,12 +1461,24 @@ a {
   .hero-title {
     font-size: 7rem; /* <-- Aumenta el tamaño, ajusta el valor según veas */
   }
+
+  .hero-subtitle {
+    font-size: 1.5rem; /* <-- Haz que el subtítulo sea más legible */
+  }
 }
 
 /* ==========================
     ACCESSIBILITY IMPROVEMENTS
 ========================== */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  .hero-title {
+    font-size: 7rem; /* Era 2.2rem, lo subimos para más impacto */
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem; /* Un poco más grande para mejor lectura */
+  }
+
   .hero-section {
     background-position: center center;
   }
