@@ -54,7 +54,7 @@
     <!-- Hero Section -->
     <section class="hero is-fullheight hero-section"
         {% if cliente.imagen_fondo %}
-            style="background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1)), url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center 25%;"
+            style="background-image: url('{{ cliente.imagen_fondo.url }}'); background-size: cover; background-position: center 25%;"
         {% endif %}>
         
         <div class="hero-body hero-body-bottom">

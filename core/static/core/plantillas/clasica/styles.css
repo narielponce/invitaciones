@@ -127,8 +127,15 @@ a {
   right: 0;
   bottom: 0;
   /*background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));*/
-  background: rgba(0, 0, 0, 0.5);
-  mix-blend-mode: multiply;
+  /*background: rgba(0, 0, 0, 0.05);*/
+  /*mix-blend-mode: multiply;*/
+  /* 🟢 NUEVO DEGRADADO: Transparente (0%) arriba a Negro Oscuro (75%) abajo */
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.0) 0%,   /* Transparente al inicio */
+      rgba(0, 0, 0, 0.0) 50%,  /* Mantiene la transparencia hasta el 50% de la altura */
+      rgba(0, 0, 0, 0.4) 80%,  /* Empieza a oscurecer al 80% */
+      rgba(0, 0, 0, 0.85) 100% /* Máxima oscuridad al final (fondo) */
+  );
   z-index: 1;
 }
 
@@ -1449,6 +1456,10 @@ a {
 
   .enhanced-modal-body {
     padding: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 7rem; /* <-- Aumenta el tamaño, ajusta el valor según veas */
   }
 }
 
